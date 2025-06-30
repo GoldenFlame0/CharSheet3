@@ -1,0 +1,264 @@
+<UserControl
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:vm="clr-namespace:CharSheet3.ViewModels"
+  xmlns:conv="clr-namespace:CharSheet3.Converters"
+  xmlns:ctrls="clr-namespace:CharSheet3.Controls"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  x:Class="CharSheet3.Views.MainView"
+  x:DataType="vm:MainViewModel">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <conv:ModifierDisplayConverter x:Key="ModifierDisplayConverter"/>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <UserControl.Styles>
+    <Style Selector="TextBox.AbilityLabel">
+      <Setter Property="FontSize" Value="20" />
+      <Setter Property="FontFamily" Value="Monospace" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style Selector="TextBlock.AbilityLabel">
+      <Setter Property="FontSize" Value="20" />
+      <Setter Property="FontFamily" Value="Monospace" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="5" />
+    </Style>
+    <Style Selector="TextBlock.SkillLabel">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Margin" Value="5" />
+      <Setter Property="MinWidth" Value="25"/>
+    </Style>
+  </UserControl.Styles>
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+
+  <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+
+    <TextBox
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      FontSize="24"
+      Margin="10"
+      Text="{Binding CharacterName, Mode=TwoWay}"/>
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="Level: "/>
+      <TextBox Text="{Binding Level, Mode=TwoWay}"
+               Width="50" Margin="5" HorizontalAlignment="Left"/>
+    </StackPanel>
+
+    <!-- Ability Scores -->
+    <Grid
+      Margin="5"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      ColumnDefinitions="1*, 1*, 1*, 1*, 1*, 1*"
+      RowDefinitions="auto, auto, auto, auto">
+
+      <!-- Labels for each field. -->
+      <TextBlock
+        Grid.Row="0" Grid.Column="0" Margin="5" Text="STR" Classes="AbilityLabel"
+      />
+      <TextBlock
+        Grid.Row="0" Grid.Column="1" Margin="5" Text="DEX" Classes="AbilityLabel"
+      />
+      <TextBlock
+        Grid.Row="0" Grid.Column="2" Margin="5" Text="CON" Classes="AbilityLabel"
+      />
+      <TextBlock
+        Grid.Row="0" Grid.Column="3" Margin="5" Text="INT" Classes="AbilityLabel"
+      />
+      <TextBlock
+        Grid.Row="0" Grid.Column="4" Margin="5" Text="WIS" Classes="AbilityLabel"
+      />
+      <TextBlock
+        Grid.Row="0" Grid.Column="5" Margin="5" Text="CHA" Classes="AbilityLabel"
+      />
+
+      <!-- Ability score boxes. -->
+      <TextBox Grid.Row="1" Grid.Column="0" Classes="AbilityLabel"
+               Text="{Binding StrengthScore, Mode=TwoWay}"/>
+      <TextBox Grid.Row="1" Grid.Column="1" Classes="AbilityLabel"
+               Text="{Binding DexterityScore, Mode=TwoWay}"/>
+      <TextBox Grid.Row="1" Grid.Column="2" Classes="AbilityLabel"
+               Text="{Binding ConstitutionScore, Mode=TwoWay}"/>
+      <TextBox Grid.Row="1" Grid.Column="3" Classes="AbilityLabel"
+               Text="{Binding IntelligenceScore, Mode=TwoWay}"/>
+      <TextBox Grid.Row="1" Grid.Column="4" Classes="AbilityLabel"
+               Text="{Binding WisdomScore, Mode=TwoWay}"/>
+      <TextBox Grid.Row="1" Grid.Column="5" Classes="AbilityLabel"
+               Text="{Binding CharismaScore, Mode=TwoWay}"/>
+      <!-- Modifiers. -->
+      <TextBlock
+        Grid.Row="2" Grid.Column="0" Classes="AbilityLabel"
+        Text="{Binding StrengthModifier, Converter={StaticResource ModifierDisplayConverter}}"
+        />
+      <TextBlock
+        Grid.Row="2" Grid.Column="1" Classes="AbilityLabel"
+        Text="{Binding DexterityModifier, Converter={StaticResource ModifierDisplayConverter}}"
+        />
+      <TextBlock
+        Grid.Row="2" Grid.Column="2" Classes="AbilityLabel"
+        Text="{Binding ConstitutionModifier, Converter={StaticResource ModifierDisplayConverter}}"
+        />
+      <TextBlock
+        Grid.Row="2" Grid.Column="3" Classes="AbilityLabel"
+        Text="{Binding IntelligenceModifier, Converter={StaticResource ModifierDisplayConverter}}"
+        />
+      <TextBlock
+        Grid.Row="2" Grid.Column="4" Classes="AbilityLabel"
+        Text="{Binding WisdomModifier, Converter={StaticResource ModifierDisplayConverter}}"
+        />
+      <TextBlock
+        Grid.Row="2" Grid.Column="5" Classes="AbilityLabel"
+        Text="{Binding CharismaModifier, Converter={StaticResource ModifierDisplayConverter}}"
+        />
+
+      <!-- Skills -->
+      <!-- Strength -->
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding StrengthSaves, Mode=TwoWay}"/>
+          <TextBlock Text="Saving Throws" Margin="5"/>
+          <TextBlock Text="{Binding StrengthSavesModifier, Converter={StaticResource ModifierDisplayConverter}}" Margin="5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Athletics, Mode=TwoWay}"/>
+          <TextBlock Text="Athletics" Margin="5"/>
+          <TextBlock Text="{Binding AthleticsModifier, Converter={StaticResource ModifierDisplayConverter}}" Margin="5"/>
+        </StackPanel>
+      </StackPanel>
+      <!-- Dexterity -->
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding DexteritySaves, Mode=TwoWay}"/>
+          <TextBlock Text="Saving Throws" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding DexteritySavesModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Acrobatics, Mode=TwoWay}"/>
+          <TextBlock Text="Acrobatics" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding AcrobaticsModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Stealth, Mode=TwoWay}"/>
+          <TextBlock Text="Stealth" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding StealthModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding SleightOfHand, Mode=TwoWay}"/>
+          <TextBlock Text="Sleight of Hand" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding SleightOfHandModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+      </StackPanel>
+      <!-- Constitution -->
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="2">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding ConstitutionSaves, Mode=TwoWay}"/>
+          <TextBlock Text="Saving Throws" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding ConstitutionSavesModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+      </StackPanel>
+      <!-- Intelligence -->
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="3">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding IntelligenceSaves, Mode=TwoWay}"/>
+          <TextBlock Text="Saving Throws" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding IntelligenceSavesModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Arcana, Mode=TwoWay}"/>
+          <TextBlock Text="Arcana" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding ArcanaModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding History, Mode=TwoWay}"/>
+          <TextBlock Text="History" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding HistoryModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Investigation, Mode=TwoWay}"/>
+          <TextBlock Text="Investigation" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding InvestigationModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Nature, Mode=TwoWay}"/>
+          <TextBlock Text="Nature" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding NatureModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Religion, Mode=TwoWay}"/>
+          <TextBlock Text="Religion" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding ReligionModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+      </StackPanel>
+      <!-- Wisdom -->
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="4">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding WisdomSaves, Mode=TwoWay}"/>
+          <TextBlock Text="Saving Throws" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding WisdomSavesModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding AnimalHandling, Mode=TwoWay}"/>
+          <TextBlock Text="Animal Handling" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding AnimalHandlingModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Insight, Mode=TwoWay}"/>
+          <TextBlock Text="Insight" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding InsightModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Medicine, Mode=TwoWay}"/>
+          <TextBlock Text="Medicine" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding MedicineModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Perception, Mode=TwoWay}"/>
+          <TextBlock Text="Perception" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding PerceptionModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Survival, Mode=TwoWay}"/>
+          <TextBlock Text="Survival" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding SurvivalModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+      </StackPanel>
+      <!-- Charisma -->
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="5">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding CharismaSaves, Mode=TwoWay}"/>
+          <TextBlock Text="Saving Throws" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding CharismaSavesModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Deception, Mode=TwoWay}"/>
+          <TextBlock Text="Deception" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding DeceptionModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Intimidation, Mode=TwoWay}"/>
+          <TextBlock Text="Intimidation" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding IntimidationModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Performance, Mode=TwoWay}"/>
+          <TextBlock Text="Performance" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding PerformanceModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+          <ctrls:ProficiencyIndicator ProficiencyLevel="{Binding Persuasion, Mode=TwoWay}"/>
+          <TextBlock Text="Persuasion" Classes="SkillLabel"/>
+          <TextBlock Text="{Binding PersuasionModifier, Converter={StaticResource ModifierDisplayConverter}}" Classes="SkillLabel"/>
+        </StackPanel>
+      </StackPanel>
+    </Grid>
+  </StackPanel>
+</UserControl>

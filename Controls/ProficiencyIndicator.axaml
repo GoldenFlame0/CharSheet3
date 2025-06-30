@@ -1,0 +1,25 @@
+<UserControl
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="CharSheet3.Controls.ProficiencyIndicator"
+  Width="28" Height="28">
+  <Border
+    x:Name="Circle"
+    Width="24" Height="24"
+    CornerRadius="12"
+    BorderBrush="Black"
+    BorderThickness="2"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    Background="Gray">
+    <TextBlock
+      x:Name="IndicatorText"
+      FontWeight="Bold"
+      FontSize="14"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      Text=""
+      Background="Gray"
+      />
+  </Border>
+</UserControl>
