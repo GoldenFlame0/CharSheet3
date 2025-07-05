@@ -1,7 +1,12 @@
-﻿using CharSheet3.Models;
+﻿using System;
+
+using CharSheet3.Models;
+
 using CommunityToolkit.Mvvm.ComponentModel;
-using System.Reflection;
-using System.Security;
+using CommunityToolkit.Mvvm.Input;
+
+using Microsoft.VisualBasic;
+
 using static CharSheet3.Utilities.Calculators;
 
 namespace CharSheet3.ViewModels;
@@ -17,28 +22,25 @@ public partial class MainViewModel : ViewModelBase
 
         Level = characterData.Level;
 
-        StrengthScore = characterData.StrengthScore;
-        DexterityScore = characterData.DexterityScore;
-        ConstitutionScore = characterData.ConstitutionScore;
-        IntelligenceScore = characterData.IntelligenceScore;
-        WisdomScore = characterData.WisdomScore;
-        CharismaScore = characterData.CharismaScore;
+        UpdateAllFromModel();
     }
 
-    #region Character Name
+    #region Properties
+    #region Top-Level Character Data
 
     [ObservableProperty]
-    private string characterName = "New Character";
+    private string characterName;
     partial void OnCharacterNameChanged(string value)
     {
         characterData.CharacterName = value;
     }
 
     [ObservableProperty]
-    private int level = 1;
+    private int level;
     partial void OnLevelChanged(int value)
     {
         characterData.Level = value;
+        UpdateAllFromModel();
     }
 
     #endregion
@@ -49,9 +51,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnStrengthScoreChanged(int value)
     {
         characterData.StrengthScore = value;
-        StrengthModifier = CalculateModifier(value);
-        StrengthSavesModifier = CalculateProficiencyBonus(StrengthModifier, characterData.Level, characterData.StrengthSaves);
-        AthleticsModifier = CalculateProficiencyBonus(StrengthModifier, characterData.Level, characterData.Athletics);
+        UpdateStrengthFromModel();
     }
 
     [ObservableProperty]
@@ -62,11 +62,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnDexterityScoreChanged(int value)
     {
         characterData.DexterityScore = value;
-        DexterityModifier = CalculateModifier(value);
-        DexteritySavesModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.DexteritySaves);
-        AcrobaticsModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.Acrobatics);
-        StealthModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.Stealth);
-        SleightOfHandModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.SleightOfHand);
+        UpdateDexterityFromModel();
     }
 
     [ObservableProperty]
@@ -77,8 +73,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnConstitutionScoreChanged(int value)
     {
         characterData.ConstitutionScore = value;
-        ConstitutionModifier = CalculateModifier(value);
-        ConstitutionSavesModifier = CalculateProficiencyBonus(ConstitutionModifier, characterData.Level, characterData.ConstitutionSaves);
+        UpdateConstitutionFromModel();
     }
 
     [ObservableProperty]
@@ -89,13 +84,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnIntelligenceScoreChanged(int value)
     {
         characterData.IntelligenceScore = value;
-        IntelligenceModifier = CalculateModifier(value);
-        IntelligenceSavesModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.IntelligenceSaves);
-        ArcanaModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Arcana);
-        HistoryModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.History);
-        InvestigationModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Investigation);
-        NatureModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Nature);
-        ReligionModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Religion);
+        UpdateIntelligenceFromModel();
     }
 
     [ObservableProperty]
@@ -106,13 +95,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnWisdomScoreChanged(int value)
     {
         characterData.WisdomScore = value;
-        WisdomModifier = CalculateModifier(value);
-        WisdomSavesModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.WisdomSaves);
-        AnimalHandlingModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.AnimalHandling);
-        InsightModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Insight);
-        MedicineModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Medicine);
-        PerceptionModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Perception);
-        SurvivalModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Survival);
+        UpdateWisdomFromModel();
     }
 
     [ObservableProperty]
@@ -123,12 +106,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnCharismaScoreChanged(int value)
     {
         characterData.CharismaScore = value;
-        CharismaModifier = CalculateModifier(value);
-        CharismaSavesModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.CharismaSaves);
-        DeceptionModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Deception);
-        IntimidationModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Intimidation);
-        PerformanceModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Performance);
-        PersuasionModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Persuasion);
+        UpdateCharismaFromModel();
     }
 
     [ObservableProperty]
@@ -382,6 +360,140 @@ public partial class MainViewModel : ViewModelBase
     }
     [ObservableProperty]
     private int persuasionModifier;
+
+    #endregion
+    #endregion
+
+    [RelayCommand]
+    public void SaveCharacterData(string filePath)
+    {
+        
+
+        Character5e.ExportToXml(characterData, filePath);
+    }
+
+    [RelayCommand]
+    public void LoadCharacterData(string filePath)
+    {
+        var loadedCharacter = Character5e.ImportFromXml(filePath);
+        if (loadedCharacter != null)
+        {
+            characterData = loadedCharacter;
+            UpdateAllFromModel();
+        }
+        else
+        {
+            // Handle the case where loading fails, e.g., show an error message
+            Console.WriteLine("Failed to load character data from XML.");
+        }
+    }
+
+    [RelayCommand]
+    public void NewCharacter()
+    {
+        characterData = new Character5e();
+        // Reset all properties to default values
+        UpdateAllFromModel();
+    }
+
+    #region Updaters
+
+    public void UpdateAllFromModel()
+    {
+        characterData.CharacterName = CharacterName;
+
+        characterData.Level = Level;
+        UpdateStrengthFromModel();
+        UpdateDexterityFromModel();
+        UpdateConstitutionFromModel();
+        UpdateIntelligenceFromModel();
+        UpdateWisdomFromModel();
+        UpdateCharismaFromModel();
+    }
+
+    public void UpdateStrengthFromModel()
+    {
+        StrengthScore = characterData.StrengthScore;
+        StrengthModifier = CalculateModifier(StrengthScore);
+        StrengthSaves = characterData.StrengthSaves;
+        StrengthSavesModifier = CalculateProficiencyBonus(StrengthModifier, characterData.Level, characterData.StrengthSaves);
+        Athletics = characterData.Athletics;
+        AthleticsModifier = CalculateProficiencyBonus(StrengthModifier, characterData.Level, characterData.Athletics);
+    }
+
+    public void UpdateDexterityFromModel()
+    {
+        DexterityScore = characterData.DexterityScore;
+        DexterityModifier = CalculateModifier(DexterityScore);
+        DexteritySaves = characterData.DexteritySaves;
+        DexteritySavesModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.DexteritySaves);
+        Acrobatics = characterData.Acrobatics;
+        AcrobaticsModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.Acrobatics);
+        Stealth = characterData.Stealth;
+        StealthModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.Stealth);
+        SleightOfHand = characterData.SleightOfHand;
+        SleightOfHandModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, characterData.SleightOfHand);
+    }
+
+    public void UpdateConstitutionFromModel()
+    {
+        ConstitutionScore = characterData.ConstitutionScore;
+        ConstitutionModifier = CalculateModifier(ConstitutionScore);
+        ConstitutionSaves = characterData.ConstitutionSaves;
+        ConstitutionSavesModifier = CalculateProficiencyBonus(ConstitutionModifier, characterData.Level, characterData.ConstitutionSaves);
+    }
+
+    public void UpdateIntelligenceFromModel()
+    {
+        IntelligenceScore = characterData.IntelligenceScore;
+        IntelligenceModifier = CalculateModifier(IntelligenceScore);
+        IntelligenceSaves = characterData.IntelligenceSaves;
+        IntelligenceSavesModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.IntelligenceSaves);
+        Arcana = characterData.Arcana;
+        ArcanaModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Arcana);
+        History = characterData.History;
+        HistoryModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.History);
+        Investigation = characterData.Investigation;
+        InvestigationModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Investigation);
+        Nature = characterData.Nature;
+        NatureModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Nature);
+        Religion = characterData.Religion;
+        ReligionModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, characterData.Religion);
+    }
+
+    public void UpdateWisdomFromModel()
+    {
+        WisdomScore = characterData.WisdomScore;
+        WisdomModifier = CalculateModifier(WisdomScore);
+        WisdomSaves = characterData.WisdomSaves;
+        WisdomSavesModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.WisdomSaves);
+        AnimalHandling = characterData.AnimalHandling;
+        AnimalHandlingModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.AnimalHandling);
+        Insight = characterData.Insight;
+        InsightModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Insight);
+        Medicine = characterData.Medicine;
+        MedicineModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Medicine);
+        Perception = characterData.Perception;
+        PerceptionModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Perception);
+        Survival = characterData.Survival;
+        SurvivalModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, characterData.Survival);
+    }
+
+    public void UpdateCharismaFromModel()
+    {
+        CharismaScore = characterData.CharismaScore;
+        CharismaModifier = CalculateModifier(CharismaScore);
+        CharismaSaves = characterData.CharismaSaves;
+        CharismaSavesModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.CharismaSaves);
+        Deception = characterData.Deception;
+        DeceptionModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Deception);
+        Intimidation = characterData.Intimidation;
+        IntimidationModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Intimidation);
+        Performance = characterData.Performance;
+        PerformanceModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Performance);
+        Persuasion = characterData.Persuasion;
+        PersuasionModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, characterData.Persuasion);
+    }
 
     #endregion
 }

@@ -8,7 +8,10 @@
   xmlns:ctrls="clr-namespace:CharSheet3.Controls"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   x:Class="CharSheet3.Views.MainView"
-  x:DataType="vm:MainViewModel">
+  x:DataType="vm:MainViewModel"
+  xmlns:services="using:CharSheet3.Services"
+  
+  >
   <UserControl.Resources>
     <ResourceDictionary>
       <conv:ModifierDisplayConverter x:Key="ModifierDisplayConverter"/>
@@ -32,6 +35,9 @@
       <Setter Property="Margin" Value="5" />
       <Setter Property="MinWidth" Value="25"/>
     </Style>
+    <Style Selector="Button.TopBar">
+      <Setter Property="Margin" Value="5" />
+    </Style>
   </UserControl.Styles>
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
@@ -41,6 +47,12 @@
 
   <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
 
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Background="Gray">
+      <Button Content="New Character" Margin="5" Command="{Binding NewCharacterCommand}" Classes="TopBar"/>
+      <Button Content="Load Character" Margin="5" Command="{Binding LoadCharacterDataCommand}" Classes="TopBar"/>
+      <Button Content="Save Character" Margin="5" Command="{Binding SaveCharacterDataCommand}" Classes="TopBar"/>
+    </StackPanel>
+    
     <TextBox
       HorizontalAlignment="Left"
       VerticalAlignment="Center"

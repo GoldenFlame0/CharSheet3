@@ -54,4 +54,35 @@ public class Character5e
     public Proficiency Persuasion { get; set; } = Proficiency.None;
 
     #endregion
+
+    public static bool ExportToXml(Character5e character, string filePath)
+    {
+        try
+        {
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Character5e));
+            using var writer = new System.IO.StreamWriter(filePath);
+            serializer.Serialize(writer, character);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error exporting to XML: {ex.Message}");
+            return false;
+        }
+    }
+
+    public static Character5e? ImportFromXml(string filePath)
+    {
+        try
+        {
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Character5e));
+            using var reader = new System.IO.StreamReader(filePath);
+            return (Character5e)serializer.Deserialize(reader);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error importing from XML: {ex.Message}");
+            return null;
+        }
+    }
 }

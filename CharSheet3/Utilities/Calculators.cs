@@ -22,7 +22,7 @@ public static class Calculators
         return proficiency switch
         {
             Proficiency.Proficient => profBonus + scoreBonus, // Add score bonus for proficiency
-            Proficiency.Expertise => (profBonus * 2) + scoreBonus, // Double the bonus for expertise
+            Proficiency.Expertise => (profBonus * 2) + scoreBonus, // Double the proficiency bonus for expertise
             _ => scoreBonus, // No proficiency, just return the score bonus
         };
     }
