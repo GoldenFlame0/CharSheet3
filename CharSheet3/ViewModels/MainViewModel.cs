@@ -8,8 +8,6 @@ using CharSheet3.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-using Microsoft.VisualBasic;
-
 using static CharSheet3.Utilities.Calculators;
 
 namespace CharSheet3.ViewModels;
@@ -21,9 +19,6 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         characterData = new();
-        // Initialize properties from characterData
-
-        Level = characterData.Level;
 
         UpdateAllFromModel();
     }
