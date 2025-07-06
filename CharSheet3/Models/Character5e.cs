@@ -73,6 +73,12 @@ public class Character5e
 
     public static Character5e? ImportFromXml(string filePath)
     {
+        if (string.IsNullOrEmpty(filePath) || !System.IO.File.Exists(filePath))
+        {
+            Console.WriteLine("File path is invalid or file does not exist.");
+            return null;
+        }
+
         try
         {
             var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Character5e));

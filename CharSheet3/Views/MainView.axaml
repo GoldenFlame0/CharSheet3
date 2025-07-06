@@ -10,7 +10,7 @@
   x:Class="CharSheet3.Views.MainView"
   x:DataType="vm:MainViewModel"
   xmlns:services="using:CharSheet3.Services"
-  
+  services:DialogManager.Register="{Binding}"
   >
   <UserControl.Resources>
     <ResourceDictionary>

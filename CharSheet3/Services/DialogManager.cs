@@ -10,8 +10,11 @@ using Avalonia.Platform.Storage;
 namespace CharSheet3.Services;
 
 // https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/ViewInteraction/DialogManagerSample#the-solution--use-a-dialogservice-to-show-a-dialog
-public class DialogManager
+public class DialogManager : AvaloniaObject
 {
+    /// <summary>
+    /// Stores registered mappings between VMs and Views.
+    /// </summary>
     private static readonly Dictionary<object, Visual> RegistrationMapper = [];
 
     /// <summary>
@@ -117,7 +120,36 @@ public static class DialogHelper
         );
 
         // return the result
-        return storageFiles.Select(s => s.Name);
+        return storageFiles.Select(s => s.TryGetLocalPath() ?? string.Empty);
+    }
+
+    public static async Task<string> OpenSaveDialogAsync(this object? context, string? title = null, string suggestedName = "", string defaultExtension = "")
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        // lookup the TopLevel for the context
+        var topLevel = DialogManager.GetTopLevelForContext(context);
+        if (topLevel is null)
+        {
+            return string.Empty; // No TopLevel found, cannot open dialog
+        }
+        // Open the folder dialog
+        IStorageFile? saveLocation = await topLevel.StorageProvider.SaveFilePickerAsync
+        (
+            new FilePickerSaveOptions()
+            {
+                DefaultExtension = defaultExtension,
+                SuggestedFileName = suggestedName,
+                Title = title ?? "Save As...",
+            }
+        );
+
+        if (saveLocation is null)
+        {
+            return string.Empty; // User cancelled the dialog
+        }
+
+        // return the result
+        return saveLocation.TryGetLocalPath() ?? string.Empty;
     }
 }
 

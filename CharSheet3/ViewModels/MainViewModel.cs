@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 using CharSheet3.Models;
+using CharSheet3.Services;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -365,17 +368,24 @@ public partial class MainViewModel : ViewModelBase
     #endregion
 
     [RelayCommand]
-    public void SaveCharacterData(string filePath)
+    public async Task SaveCharacterData()
     {
-        
+        var location = await this.OpenSaveDialogAsync(title: "Save Character Data", suggestedName: characterData.CharacterName, defaultExtension: "xml");
 
-        Character5e.ExportToXml(characterData, filePath);
+        Character5e.ExportToXml(characterData, location);
     }
 
     [RelayCommand]
-    public void LoadCharacterData(string filePath)
+    public async Task LoadCharacterData()
     {
-        var loadedCharacter = Character5e.ImportFromXml(filePath);
+        var location = await this.OpenFileDialogAsync(title: "Load Character Data", selectMany: false);
+        if (location == null || !location.Any())
+        {
+            // Handle the case where no file was selected
+            Console.WriteLine("No file selected for loading character data.");
+            return;
+        }
+        var loadedCharacter = Character5e.ImportFromXml(location.First());
         if (loadedCharacter != null)
         {
             characterData = loadedCharacter;
@@ -400,9 +410,9 @@ public partial class MainViewModel : ViewModelBase
 
     public void UpdateAllFromModel()
     {
-        characterData.CharacterName = CharacterName;
+        CharacterName = characterData.CharacterName;
 
-        characterData.Level = Level;
+        Level = characterData.Level;
         UpdateStrengthFromModel();
         UpdateDexterityFromModel();
         UpdateConstitutionFromModel();
