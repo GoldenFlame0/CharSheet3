@@ -367,7 +367,7 @@ public partial class MainViewModel : ViewModelBase
     {
         var location = await this.OpenSaveDialogAsync(title: "Save Character Data", suggestedName: characterData.CharacterName, defaultExtension: "xml");
 
-        Character5e.ExportToXml(characterData, location);
+        Utilities.ExportImport.ExportToXmlFile(characterData, location);
     }
 
     [RelayCommand]
@@ -380,7 +380,7 @@ public partial class MainViewModel : ViewModelBase
             Console.WriteLine("No file selected for loading character data.");
             return;
         }
-        var loadedCharacter = Character5e.ImportFromXml(location.First());
+        Character5e? loadedCharacter = Utilities.ExportImport.ImportFromXmlFile<Character5e?>(location.First());
         if (loadedCharacter != null)
         {
             characterData = loadedCharacter;
