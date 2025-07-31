@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using static CharSheet3.Utilities.Calculators;
 
 namespace CharSheet3.Models;
 
+/// <summary>
+/// A model class representing a D&D 5e character.
+/// Should mostly be used for data and some small nicities, manipulation is done in the ViewModels.
+/// </summary>
 public class Character5e
 {
     public string CharacterName { get; set; } = "New Character";
     public int Level { get; set; } = 1;
+    public List<KeyValuePair<string, int>> Classes { get; set; } = []; // Class name and level pairs
 
     #region Ability Scores
     public int StrengthScore { get; set; } = 10;
@@ -55,6 +58,15 @@ public class Character5e
 
     #endregion
 
+    #region File Import/Export
+
+    // TODO: convert to streams.
+    // (This is intended to be the model layer,
+    // we shouldn't assume anything about the use-case.)
+
+    /// <summary>
+    /// Does what it says on the tin.
+    /// </summary>
     public static bool ExportToXml(Character5e character, string filePath)
     {
         try
@@ -71,6 +83,9 @@ public class Character5e
         }
     }
 
+    /// <summary>
+    /// Does what it says on the tin.
+    /// </summary>
     public static Character5e? ImportFromXml(string filePath)
     {
         if (string.IsNullOrEmpty(filePath) || !System.IO.File.Exists(filePath))
@@ -83,7 +98,7 @@ public class Character5e
         {
             var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Character5e));
             using var reader = new System.IO.StreamReader(filePath);
-            return (Character5e)serializer.Deserialize(reader);
+            return (Character5e?)serializer.Deserialize(reader);
         }
         catch (Exception ex)
         {
@@ -91,4 +106,5 @@ public class Character5e
             return null;
         }
     }
+    #endregion
 }
