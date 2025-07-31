@@ -9,7 +9,10 @@ using Avalonia.Platform.Storage;
 
 namespace CharSheet3.Services;
 
-// https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/ViewInteraction/DialogManagerSample#the-solution--use-a-dialogservice-to-show-a-dialog
+/// <summary>
+/// For manipulating file dialogs cross-platform-ing-ly ie: OpenFileDialog, SaveFileDialog, etc.
+/// Original src: https://github.com/AvaloniaUI/Avalonia.Samples/tree/main/src/Avalonia.Samples/ViewInteraction/DialogManagerSample#the-solution--use-a-dialogservice-to-show-a-dialog
+/// </summary>
 public class DialogManager : AvaloniaObject
 {
     /// <summary>
@@ -85,7 +88,7 @@ public class DialogManager : AvaloniaObject
 }
 
 /// <summary>
-/// A helper class to manage dialogs via extension methods. Add more on your own
+/// A helper class to manage dialogs via extension methods.
 /// </summary>
 public static class DialogHelper
 {
