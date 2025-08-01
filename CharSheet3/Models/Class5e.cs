@@ -25,7 +25,7 @@ public enum MagicOrigin
     Divine,
     Primal,
     Occult,
-    Psionic
+    Psionic,
 }
 
 /// <summary>
@@ -35,6 +35,7 @@ public enum MagicOrigin
 public class Class5e
 {
     public string Name { get; set; } = "New Class";
+    public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public int HitDie { get; set; } = 8; // Default to D8
     public CasterType CasterType { get; set; } = CasterType.None; // Default to no magic caster
     public List<ClassFeature5e> Features { get; set; } = [];
@@ -44,13 +45,15 @@ public class Class5e
 public class Subclass5e
 {
     public string Name { get; set; } = "New Subclass";
+    public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public bool AddsCasting { get; set; } = false; // Defines if the PC becomes a subclass caster or not.
     public List<ClassFeature5e> Features { get; set; } = [];
 }
 
-public class  ClassFeature5e
+public class ClassFeature5e
 {
     public string Name { get; set; } = "New Feature";
+    public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public string Description { get; set; } = "Feature description goes here.";
     public int Level { get; set; } = 1;
 }
