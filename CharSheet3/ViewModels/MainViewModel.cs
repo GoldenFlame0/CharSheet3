@@ -4,10 +4,10 @@ namespace CharSheet3.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private CharacterViewModel characterViewModel = new();
-
     public MainViewModel()
     {
     }
+
+    [ObservableProperty]
+    private CharacterViewModel characterViewModel = new();
 }

@@ -9,5 +9,5 @@
   x:Class="CharSheet3.Views.MainWindow"
   Icon="/Assets/avalonia-logo.ico"
   Title="5e Character Sheet Tool">
-  <views:MainView DataContext="{Binding MainViewModel}"/>
+  <views:MainView/>
 </Window>
