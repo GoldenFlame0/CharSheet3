@@ -27,6 +27,7 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            // NB: desktop.MainWindow is an Avalonia thing, but the MainWindow class is in our project.
             desktop.MainWindow = new MainWindow
             {
                 DataContext = _mainViewModel

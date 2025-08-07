@@ -47,23 +47,25 @@
   </Design.DataContext>
   <SplitView
       IsPaneOpen="True"
-      OpenPaneLength="100"
+      OpenPaneLength="150"
       CompactPaneLength="40"
       DisplayMode="CompactInline">
     <SplitView.Pane>
       <StackPanel Orientation="Vertical" Spacing="5" Margin="5">
-        <Button></Button>
+        <Button>Expand Button</Button>
         <ListBox>
-          <ListBoxItem>Test</ListBoxItem>
-          <ListBoxItem>Test</ListBoxItem>
-          <ListBoxItem>Test</ListBoxItem>
-          <ListBoxItem>Test</ListBoxItem>
+          <!-- Placeholder for now -->
+          <ListBoxItem>Character Sheet</ListBoxItem>
+          <ListBoxItem>Class Creator</ListBoxItem>
+          <ListBoxItem>Option 3</ListBoxItem>
+          <ListBoxItem>Option 4</ListBoxItem>
         </ListBox>
       </StackPanel>
     </SplitView.Pane>
     <SplitView.Content>
      <views:CharacterSheetView
-        DataContext="{Binding _characterViewModel}"
+        Name="bleh"
+        DataContext="{Binding CharacterViewModel}"
         Margin="5"/>
     </SplitView.Content>
   </SplitView>

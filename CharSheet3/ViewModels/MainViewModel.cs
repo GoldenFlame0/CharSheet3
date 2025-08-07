@@ -1,8 +1,11 @@
-﻿namespace CharSheet3.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace CharSheet3.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    CharacterViewModel? _characterViewModel = new();
+    [ObservableProperty]
+    private CharacterViewModel characterViewModel = new();
 
     public MainViewModel()
     {

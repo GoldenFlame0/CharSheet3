@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CharSheet3.ViewModels;
-
-public partial class MainWindowViewModel : ViewModelBase
+public partial class ClassBuilder : ViewModelBase
 {
-
 }
