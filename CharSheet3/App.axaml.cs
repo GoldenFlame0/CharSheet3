@@ -10,6 +10,7 @@ namespace CharSheet3;
 
 public partial class App : Application
 {
+    public MainViewModel _mainViewModel;
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -21,21 +22,29 @@ public partial class App : Application
         // Without this line you will get duplicate validations from both Avalonia and CT
         BindingPlugins.DataValidators.RemoveAt(0);
 
+        // I feel like this line might need to be earlier.
+        RegisterViewmodelsAndServices();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel()
+                DataContext = _mainViewModel
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             singleViewPlatform.MainView = new MainView
             {
-                DataContext = new MainViewModel()
+                DataContext = _mainViewModel
             };
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void RegisterViewmodelsAndServices()
+    {
+        _mainViewModel = new();
     }
 }

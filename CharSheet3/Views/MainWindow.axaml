@@ -9,32 +9,5 @@
   x:Class="CharSheet3.Views.MainWindow"
   Icon="/Assets/avalonia-logo.ico"
   Title="5e Character Sheet Tool">
-  <SplitView
-    IsPaneOpen="True"
-    OpenPaneLength="300"
-    CompactPaneLength="48"
-    DisplayMode="CompactInline">
-    <SplitView.Pane>
-      <StackPanel Orientation="Vertical" Spacing="5" Margin="5">
-        <Button></Button>
-        <ListBox>
-          <ListBoxItem>Test</ListBoxItem>
-          <ListBoxItem>Test</ListBoxItem>
-          <ListBoxItem>Test</ListBoxItem>
-          <ListBoxItem>Test</ListBoxItem>
-        </ListBox>
-      </StackPanel>
-    </SplitView.Pane>
-    <SplitView.Content>
-      <views:CharacterSheetView DataContext="{Binding CharacterSheetViewModel}"/>
-    </SplitView.Content>
-  </SplitView>
-  <!--<SplitView Margin="0,0,0,0">
-    <SplitView.Pane>
-      <views:ClassBuilderView DataContext="{Binding ClassBuilderViewModel}"/>
-    </SplitView.Pane>
-    <SplitView.Content>
-      <views:CharacterSheetView DataContext="{Binding CharacterSheetViewModel}"/>
-    </SplitView.Content>
-   </SplitView>-->
+  <views:MainView DataContext="{Binding MainViewModel}"/>
 </Window>

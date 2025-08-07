@@ -27,7 +27,7 @@ public partial class CharacterViewModel : ViewModelBase
     #region Top-Level Character Data
 
     [ObservableProperty]
-    private string characterName;
+    private string characterName = "";
     partial void OnCharacterNameChanged(string value)
     {
         characterData.CharacterName = value;
