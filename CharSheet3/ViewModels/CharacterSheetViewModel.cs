@@ -12,11 +12,11 @@ using static CharSheet3.Utilities.Calculators;
 
 namespace CharSheet3.ViewModels;
 
-public partial class CharacterViewModel : ViewModelBase
+public partial class CharacterSheetViewModel : ViewModelBase
 {
     Character5e characterData;
 
-    public CharacterViewModel()
+    public CharacterSheetViewModel()
     {
         characterData = new();
 

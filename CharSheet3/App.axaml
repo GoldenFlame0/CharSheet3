@@ -1,10 +1,17 @@
-<Application xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="CharSheet3.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+<Application
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="CharSheet3.App"
+  RequestedThemeVariant="Default"
+  xmlns:local="using:CharSheet3">
+  <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
-    <Application.Styles>
-        <FluentTheme />
-    </Application.Styles>
+  <Application.DataTemplates>
+    <local:ViewLocator />
+  </Application.DataTemplates>
+  
+  <Application.Styles>
+    <FluentTheme />
+    <StyleInclude Source="avares://CharSheet3/Assets/Icons.axaml"></StyleInclude>
+  </Application.Styles>
 </Application>

@@ -8,7 +8,7 @@
   xmlns:conv="clr-namespace:CharSheet3.Converters"
   xmlns:ctrls="clr-namespace:CharSheet3.Controls"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-  x:DataType="vm:CharacterViewModel"
+  x:DataType="vm:CharacterSheetViewModel"
   x:Class="CharSheet3.Views.CharacterSheetView"
   xmlns:services="using:CharSheet3.Services"
   services:DialogManager.Register="{Binding}"
@@ -20,11 +20,13 @@
   </UserControl.Resources>
   <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Background="Gray">
-      <Button Content="New Character" Margin="5" Command="{Binding NewCharacterCommand}" Classes="TopBar"/>
-      <Button Content="Load Character" Margin="5" Command="{Binding LoadCharacterDataCommand}" Classes="TopBar"/>
-      <Button Content="Save Character" Margin="5" Command="{Binding SaveCharacterDataCommand}" Classes="TopBar"/>
-    </StackPanel>
+    <Border Classes="TopBar">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+        <Button Content="New Character" Margin="5" Command="{Binding NewCharacterCommand}" Classes="TopBar"/>
+        <Button Content="Load Character" Margin="5" Command="{Binding LoadCharacterDataCommand}" Classes="TopBar"/>
+        <Button Content="Save Character" Margin="5" Command="{Binding SaveCharacterDataCommand}" Classes="TopBar"/>
+      </StackPanel>
+    </Border>
 
     <TextBox
       HorizontalAlignment="Left"
@@ -33,11 +35,10 @@
       Margin="10"
       Text="{Binding CharacterName, Mode=TwoWay}"/>
     <StackPanel Orientation="Horizontal">
-      <TextBlock Text="Level: "/>
+      <TextBlock Text="Level: " Margin="5"/>
       <TextBox Text="{Binding Level, Mode=TwoWay}"
                Width="50" Margin="5" HorizontalAlignment="Left"/>
     </StackPanel>
-
     <!-- Ability Scores -->
     <Grid
       Margin="5"

@@ -16,6 +16,20 @@
   <UserControl.Resources>
     <ResourceDictionary>
       <conv:ModifierDisplayConverter x:Key="ModifierDisplayConverter"/>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key='Light'>
+          <SolidColorBrush x:Key='BackgroundBrush'>SpringGreen</SolidColorBrush>
+          <SolidColorBrush x:Key='ForegroundBrush'>Black</SolidColorBrush>
+          <SolidColorBrush x:Key='PageBrush'>White</SolidColorBrush>
+          <SolidColorBrush x:Key='MenuBrush'>#CCCCCC</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key='Dark'>
+          <SolidColorBrush x:Key='BackgroundBrush'>DodgerBlue</SolidColorBrush>
+          <SolidColorBrush x:Key='ForegroundBrush'>White</SolidColorBrush>
+          <SolidColorBrush x:Key='PageBrush'>Black</SolidColorBrush>
+          <SolidColorBrush x:Key='MenuBrush'>#333333</SolidColorBrush>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
     </ResourceDictionary>
   </UserControl.Resources>
   <UserControl.Styles>
@@ -38,6 +52,15 @@
     </Style>
     <Style Selector="Button.TopBar">
       <Setter Property="Margin" Value="5" />
+      <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+    </Style>
+    <Style Selector="Border.TopBar">
+      <Setter Property="Background" Value="{DynamicResource MenuBrush}"/>
+      <Setter Property="CornerRadius" Value="0 0 12 0"/>
+    </Style>
+    <Style Selector="Border.Content">
+      <Setter Property="Background" Value="{DynamicResource PageBrush}"/>
+      <Setter Property="CornerRadius" Value="0 0 12 0"/>
     </Style>
   </UserControl.Styles>
   <Design.DataContext>
@@ -46,29 +69,38 @@
     <vm:MainViewModel />
   </Design.DataContext>
   <SplitView
-      OpenPaneLength="150"
-      CompactPaneLength="40"
+      OpenPaneLength="200"
+      CompactPaneLength="60"
       DisplayMode="CompactInline"
-      IsPaneOpen="{Binding IsSidearOpen}">
+      IsPaneOpen="{Binding IsSidebarOpen}"
+      PaneBackground="{DynamicResource MenuBrush}"
+      Background="{DynamicResource PageBrush}"
+      >
     <SplitView.Pane>
       <StackPanel Orientation="Vertical" Spacing="5" Margin="5">
         <Button
-          Content="Expand"
-          Command="{Binding ToggleSidebarCommand}"/>
-        <ListBox>
-          <!-- Placeholder for now -->
-          <ListBoxItem>Character Sheet</ListBoxItem>
-          <ListBoxItem>Class Creator</ListBoxItem>
-          <ListBoxItem>Option 3</ListBoxItem>
-          <ListBoxItem>Option 4</ListBoxItem>
+          Command="{Binding ToggleSidebarCommand}">
+          <PathIcon Data="{StaticResource LineHorizontal3Regular}"/>
+        </Button>
+        <ListBox ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}">
+          <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type vm:ListItemTemplate}">
+              <StackPanel Spacing="15" Orientation="Horizontal">
+                <PathIcon
+                  Data="{Binding Icon}"
+                  Width="20"
+                  Height="20"
+                  Margin="5"/>
+                <TextBlock Text="{Binding Label}"/>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
         </ListBox>
       </StackPanel>
     </SplitView.Pane>
     <SplitView.Content>
-     <views:CharacterSheetView
-        Name="bleh"
-        DataContext="{Binding CharacterViewModel}"
-        Margin="5"/>
+      <TransitioningContentControl
+        Content="{Binding CurrentPage}"/>
     </SplitView.Content>
   </SplitView>
 </UserControl>
