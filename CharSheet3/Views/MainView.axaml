@@ -46,13 +46,15 @@
     <vm:MainViewModel />
   </Design.DataContext>
   <SplitView
-      IsPaneOpen="True"
       OpenPaneLength="150"
       CompactPaneLength="40"
-      DisplayMode="CompactInline">
+      DisplayMode="CompactInline"
+      IsPaneOpen="{Binding IsSidearOpen}">
     <SplitView.Pane>
       <StackPanel Orientation="Vertical" Spacing="5" Margin="5">
-        <Button>Expand Button</Button>
+        <Button
+          Content="Expand"
+          Command="{Binding ToggleSidebarCommand}"/>
         <ListBox>
           <!-- Placeholder for now -->
           <ListBoxItem>Character Sheet</ListBoxItem>

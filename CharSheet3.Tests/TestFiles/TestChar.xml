@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Character5e xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CharacterName>TestChar</CharacterName>
+  <Level>69</Level>
+  <Classes />
+  <StrengthScore>1</StrengthScore>
+  <DexterityScore>2</DexterityScore>
+  <ConstitutionScore>3</ConstitutionScore>
+  <IntelligenceScore>4</IntelligenceScore>
+  <WisdomScore>5</WisdomScore>
+  <CharismaScore>6</CharismaScore>
+  <StrengthSaves>None</StrengthSaves>
+  <Athletics>None</Athletics>
+  <DexteritySaves>Proficient</DexteritySaves>
+  <Acrobatics>None</Acrobatics>
+  <Stealth>None</Stealth>
+  <SleightOfHand>None</SleightOfHand>
+  <ConstitutionSaves>Expertise</ConstitutionSaves>
+  <IntelligenceSaves>None</IntelligenceSaves>
+  <Arcana>None</Arcana>
+  <History>None</History>
+  <Investigation>None</Investigation>
+  <Nature>None</Nature>
+  <Religion>None</Religion>
+  <WisdomSaves>Proficient</WisdomSaves>
+  <AnimalHandling>None</AnimalHandling>
+  <Insight>None</Insight>
+  <Medicine>None</Medicine>
+  <Perception>None</Perception>
+  <Survival>None</Survival>
+  <CharismaSaves>Expertise</CharismaSaves>
+  <Deception>None</Deception>
+  <Intimidation>None</Intimidation>
+  <Performance>None</Performance>
+  <Persuasion>None</Persuasion>
+</Character5e>
