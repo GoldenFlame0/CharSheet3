@@ -27,6 +27,8 @@ public partial class MainViewModel : ViewModelBase
     [
         new ListItemTemplate(typeof(CharacterSheetViewModel), "Character Sheet", "PersonRegular"),
         new ListItemTemplate(typeof(ClassBuilderViewModel), "Class Builder", "TextBulletListAddRegular"),
+        new ListItemTemplate(typeof(SettingsViewModel), "Settings", "SettingsRegular"),
+        new ListItemTemplate(typeof(AboutViewModel), "About", "InfoRegular"),
     ];
 
     [ObservableProperty]

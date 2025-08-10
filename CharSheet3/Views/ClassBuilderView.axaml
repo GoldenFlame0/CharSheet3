@@ -5,5 +5,13 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   x:Class="CharSheet3.Views.ClassBuilderView">
-  Welcome to Avalonia!
+  <StackPanel Orientation="Vertical">
+    <Border Classes="TopBar">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+        <Button Content="New" Margin="5" Command="{Binding NewCharacterCommand}" Classes="TopBar"/>
+        <Button Content="Save" Margin="5" Command="{Binding LoadCharacterDataCommand}" Classes="TopBar"/>
+      </StackPanel>
+    </Border>
+    
+  </StackPanel>
 </UserControl>

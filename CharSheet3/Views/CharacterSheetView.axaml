@@ -18,7 +18,7 @@
       <conv:ModifierDisplayConverter x:Key="ModifierDisplayConverter"/>
     </ResourceDictionary>
   </UserControl.Resources>
-  <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+  <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
 
     <Border Classes="TopBar">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
