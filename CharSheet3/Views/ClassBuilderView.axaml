@@ -5,13 +5,28 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   x:Class="CharSheet3.Views.ClassBuilderView">
-  <StackPanel Orientation="Vertical">
-    <Border Classes="TopBar">
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-        <Button Content="New" Margin="5" Command="{Binding NewCharacterCommand}" Classes="TopBar"/>
-        <Button Content="Save" Margin="5" Command="{Binding LoadCharacterDataCommand}" Classes="TopBar"/>
+  <Grid RowDefinitions="Auto,*,*" ColumnDefinitions="*,*">
+    <Border Grid.Row="0" Background="{DynamicResource MenuBrush}" CornerRadius="0 0 12 0">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <Button Content="Add Class" Command="{Binding AddClassCommand}" Classes="TopBar"/>
+        <Button Content="Sort" Command="{Binding SortClassesCommand}" Classes="TopBar"/>
       </StackPanel>
     </Border>
-    
-  </StackPanel>
+    <ListBox Grid.Row="1" ItemsSource="{Binding ClassesList}" Margin="5" SelectedItem="{Binding SelectedClass}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Name}" Margin="5" Width="80"/>
+            <Button Content="Rename"/>
+            <Button Content="Delete"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+      <TextBlock Text="Class Details" FontSize="16" FontWeight="Bold"/>
+      <TextBox Text="{Binding SelectedClass.Name}" />
+      <TextBox Text="{Binding SelectedClass.Description}"/>
+    </StackPanel>
+  </Grid>
 </UserControl>

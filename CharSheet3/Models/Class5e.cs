@@ -35,6 +35,7 @@ public enum MagicOrigin
 public class Class5e
 {
     public string Name { get; set; } = "New Class";
+    public string Description { get; set; } = "Class description goes here.";
     public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public int HitDie { get; set; } = 8; // Default to D8
     public CasterType CasterType { get; set; } = CasterType.None; // Default to no magic caster
@@ -45,6 +46,7 @@ public class Class5e
 public class Subclass5e
 {
     public string Name { get; set; } = "New Subclass";
+    public string Description { get; set; } = "Class description goes here.";
     public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public bool AddsCasting { get; set; } = false; // Defines if the PC becomes a subclass caster or not.
     public List<ClassFeature5e> Features { get; set; } = [];

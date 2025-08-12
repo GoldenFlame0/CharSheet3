@@ -9,10 +9,8 @@ namespace CharSheet3.Services;
 /// Handles navigation between different pages in the application, including lifetime of the page.
 /// Lives in the MainViewModel.
 /// </summary>
-public class NavigationService
+public class NavigationService(ConfigurationAndPlatformService configurationAndPlatformService)
 {
-    public NavigationService() { }
-
     private readonly Dictionary<Type, ViewModelBase> _viewModelInstances = [];
 
     public ViewModelBase? GetViewModel(Type viewModelType)
@@ -23,6 +21,13 @@ public class NavigationService
         }
         // If the ViewModel is not found, create a new instance and store it
         viewModel = (ViewModelBase)Activator.CreateInstance(viewModelType)!;
+
+        // Inject dependencies.
+        // This is kind of a gross way of doing DI but I CBF to learn how to do it properly right now.
+        // TODO: Fix.
+        viewModel._ConfigurationAndPlatformService = configurationAndPlatformService;
+
+        // Store the new instance in the dictionary
         _viewModelInstances[viewModelType] = viewModel;
         return viewModel;
     }

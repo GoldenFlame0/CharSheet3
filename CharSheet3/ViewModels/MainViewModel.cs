@@ -18,10 +18,12 @@ public partial class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
+        _ConfigurationAndPlatformService = new();
+        _NavigationService = new(_ConfigurationAndPlatformService);
         SelectedPage = Pages.FirstOrDefault();
     }
-
-    NavigationService NavigationService { get; } = new NavigationService();
+    // TODO: DI stuff.
+    NavigationService _NavigationService { get; }
 
     public ObservableCollection<ListItemTemplate> Pages { get; } =
     [
@@ -46,7 +48,7 @@ public partial class MainViewModel : ViewModelBase
         {
             return;
         }
-        var instance = NavigationService.GetViewModel(newValue.ListItemType);
+        var instance = _NavigationService.GetViewModel(newValue.ListItemType);
         if (instance is null)
         {
             return;

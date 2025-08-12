@@ -7,4 +7,7 @@ using System.Threading.Tasks;
 namespace CharSheet3.ViewModels;
 public partial class SettingsViewModel : ViewModelBase
 {
+    public SettingsViewModel()
+    {
+    }
 }
