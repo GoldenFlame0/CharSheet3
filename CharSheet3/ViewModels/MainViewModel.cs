@@ -19,10 +19,11 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         _ConfigurationAndPlatformService = new();
+        _ConfigurationAndPlatformService.TestString = "This is a test string from the MainViewModel constructor.";
         _NavigationService = new(_ConfigurationAndPlatformService);
         SelectedPage = Pages.FirstOrDefault();
     }
-    // TODO: DI stuff.
+    ConfigurationAndPlatformService _ConfigurationAndPlatformService { get; }
     NavigationService _NavigationService { get; }
 
     public ObservableCollection<ListItemTemplate> Pages { get; } =

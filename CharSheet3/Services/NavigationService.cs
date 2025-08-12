@@ -20,12 +20,7 @@ public class NavigationService(ConfigurationAndPlatformService configurationAndP
             return viewModel;
         }
         // If the ViewModel is not found, create a new instance and store it
-        viewModel = (ViewModelBase)Activator.CreateInstance(viewModelType)!;
-
-        // Inject dependencies.
-        // This is kind of a gross way of doing DI but I CBF to learn how to do it properly right now.
-        // TODO: Fix.
-        viewModel._ConfigurationAndPlatformService = configurationAndPlatformService;
+        viewModel = (ViewModelBase)Activator.CreateInstance(viewModelType, [configurationAndPlatformService])!;
 
         // Store the new instance in the dictionary
         _viewModelInstances[viewModelType] = viewModel;

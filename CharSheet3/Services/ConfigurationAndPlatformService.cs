@@ -11,26 +11,26 @@ namespace CharSheet3.Services;
 /// </summary>
 public class ConfigurationAndPlatformService
 {
-    public string GetOperatingSystemAndDistributionName()
+    public ConfigurationAndPlatformService() { }
+
+    public string TestString { get; set; } = "This is a test string.";
+
+    public static string GetOperatingSystemAndDistributionName()
     {
-        PlatformID platformID = Environment.OSVersion.Platform;
-        switch (platformID)
+        return Environment.OSVersion.Platform switch
         {
-            case PlatformID.Win32NT:
-                return GetWindowsReleaseName();
-            case PlatformID.Unix:
-                return GetLinuxDistroName();
-            case PlatformID.MacOSX:
-                return "macOS";
-            default:
-                return "Unknown OS";
-        }
+            PlatformID.Win32NT => GetWindowsReleaseName(),
+            PlatformID.Unix => GetLinuxDistroName(),
+            PlatformID.MacOSX => "macOS",
+            _ => "Unknown OS",
+        };
     }
 
     public static string GetWindowsReleaseName()
     {
         // I have no idea how Visual Studio's AI figured this out, but let's see.
-        return Environment.OSVersion.Version.ToString();
+
+        return "Windows " + Environment.OSVersion.Version.ToString();
     }
 
     public static string GetLinuxDistroName()
@@ -66,7 +66,7 @@ public class ConfigurationAndPlatformService
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error reading /etc/os-release: {ex.Message}");
+                Console.WriteLine($"Linux but error reading /etc/os-release: {ex.Message}");
             }
         }
         return "Linux, but can't find /etc/os-release.";

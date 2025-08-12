@@ -16,12 +16,15 @@ public partial class CharacterSheetViewModel : ViewModelBase
 {
     Character5e characterData;
 
-    public CharacterSheetViewModel()
+    public CharacterSheetViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
     {
-        characterData = new();
+        _ConfigurationAndPlatformService = configurationAndPlatformService;
 
+        characterData = new();
         UpdateAllFromModel();
     }
+
+    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
 
     #region Properties
     #region Top-Level Character Data

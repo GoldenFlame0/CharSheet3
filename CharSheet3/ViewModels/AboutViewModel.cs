@@ -5,17 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CharSheet3.Services;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CharSheet3.ViewModels;
 public partial class AboutViewModel : ViewModelBase
 {
-    public AboutViewModel()
+    public AboutViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
     {
-        Strings.Add("Your Operating System:" + _ConfigurationAndPlatformService.GetOperatingSystemAndDistributionName());
+        _ConfigurationAndPlatformService = configurationAndPlatformService;
+        OperatingSystemAndDistributionName = ConfigurationAndPlatformService.GetOperatingSystemAndDistributionName();
+        TestString = _ConfigurationAndPlatformService.TestString;
     }
 
-    ObservableCollection<string> Strings = new()
-    {
-    };
+    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
+
+    [ObservableProperty]
+    private string operatingSystemAndDistributionName = string.Empty;
+
+
+
+    [ObservableProperty]
+    private string testString = string.Empty;
 }

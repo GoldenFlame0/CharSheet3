@@ -5,7 +5,10 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   x:Class="CharSheet3.Views.AboutView">
+  <!-- Todo this should be dynamic -->
   <StackPanel Orientation="Vertical" Margin="5">
-    
+    <TextBlock>About Page</TextBlock>
+    <TextBlock Text="{Binding OperatingSystemAndDistributionName}"/>
+    <TextBlock Text="{Binding TestString}"/>
   </StackPanel>
 </UserControl>
