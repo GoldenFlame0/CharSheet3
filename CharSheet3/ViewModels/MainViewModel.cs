@@ -18,8 +18,10 @@ public partial class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
-        _ConfigurationAndPlatformService = new();
-        _ConfigurationAndPlatformService.TestString = "This is a test string from the MainViewModel constructor.";
+        _ConfigurationAndPlatformService = new()
+        {
+            TestString = "This is a test string from the MainViewModel constructor."
+        };
         _NavigationService = new(_ConfigurationAndPlatformService);
         SelectedPage = Pages.FirstOrDefault();
     }

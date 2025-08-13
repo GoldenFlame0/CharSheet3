@@ -15,6 +15,7 @@ public class ConfigurationAndPlatformService
 
     public string TestString { get; set; } = "This is a test string.";
 
+    #region Operating System and Distribution Name
     public static string GetOperatingSystemAndDistributionName()
     {
         return Environment.OSVersion.Platform switch
@@ -71,4 +72,6 @@ public class ConfigurationAndPlatformService
         }
         return "Linux, but can't find /etc/os-release.";
     }
+
+    #endregion
 }

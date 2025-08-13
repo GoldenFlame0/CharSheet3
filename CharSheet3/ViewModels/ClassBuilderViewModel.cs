@@ -19,19 +19,23 @@ public partial class ClassBuilderViewModel : ViewModelBase
     [ObservableProperty]
     private Class5e selectedClass;
 
-    public ClassBuilderViewModel()
+    public ClassBuilderViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
     {
+        _ConfigurationAndPlatformService = configurationAndPlatformService;
+
         ClassesList = new ObservableCollection<Class5e>(
         [
             // Initialize with some default classes if needed
             new Class5e { Name = "Fighter" },
             new Class5e { Name = "Wizard" },
         ]);
-        SelectedClass = ClassesList.FirstOrDefault();
+        SelectedClass = ClassesList.First();
     }
 
+    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
+
     [RelayCommand]
-    public async Task AddClass()
+    public void AddClass()
     {
         ClassesList.Add(new Class5e
         {
@@ -40,7 +44,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public async Task SortClasses()
+    public void SortClasses()
     {
         var sortedList = ClassesList.OrderBy(c => c.Name).ToList();
         ClassesList.Clear();

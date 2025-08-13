@@ -15,11 +15,9 @@ public partial class SettingsViewModel : ViewModelBase
     {
         // Initialize the properties with values from the settings service
         _ConfigurationAndPlatformService = configurationAndPlatformService;
-        operatingSystemAndDistributionName = ConfigurationAndPlatformService.GetOperatingSystemAndDistributionName();
+
+
     }
 
     ConfigurationAndPlatformService _ConfigurationAndPlatformService;
-
-    [ObservableProperty]
-    private string operatingSystemAndDistributionName = string.Empty;
 }
