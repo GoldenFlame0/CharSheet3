@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 using static CharSheet3.Utilities.Calculators;
 
-namespace CharSheet3.Models;
+namespace CharSheet3.Structures;
 
 /// <summary>
 /// A model class representing a D&D 5e character.
-/// Should mostly be used for data and some small nicities, manipulation is done in the ViewModels.
 /// </summary>
 public class Character5e
 {

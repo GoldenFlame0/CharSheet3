@@ -12,14 +12,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace CharSheet3.ViewModels;
 public partial class AboutViewModel : ViewModelBase
 {
-    public AboutViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
+    public AboutViewModel(ConfigurationService configurationAndPlatformService)
     {
         _ConfigurationAndPlatformService = configurationAndPlatformService;
-        OperatingSystemAndDistributionName = ConfigurationAndPlatformService.GetOperatingSystemAndDistributionName();
+        OperatingSystemAndDistributionName = ConfigurationService.GetOperatingSystemAndDistributionName();
         TestString = _ConfigurationAndPlatformService.TestString;
     }
 
-    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
+    ConfigurationService _ConfigurationAndPlatformService;
 
     [ObservableProperty]
     private string operatingSystemAndDistributionName = string.Empty;

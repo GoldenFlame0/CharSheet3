@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-using CharSheet3.Models;
 using CharSheet3.Services;
+using CharSheet3.Structures;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -16,7 +16,7 @@ public partial class CharacterSheetViewModel : ViewModelBase
 {
     Character5e characterData;
 
-    public CharacterSheetViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
+    public CharacterSheetViewModel(ConfigurationService configurationAndPlatformService)
     {
         _ConfigurationAndPlatformService = configurationAndPlatformService;
 
@@ -24,7 +24,7 @@ public partial class CharacterSheetViewModel : ViewModelBase
         UpdateAllFromModel();
     }
 
-    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
+    ConfigurationService _ConfigurationAndPlatformService;
 
     #region Properties
     #region Top-Level Character Data

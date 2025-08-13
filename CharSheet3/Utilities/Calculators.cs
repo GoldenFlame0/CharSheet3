@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using CharSheet3.Models;
+using CharSheet3.Structures;
 
 namespace CharSheet3.Utilities;
 

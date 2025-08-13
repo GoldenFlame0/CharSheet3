@@ -25,7 +25,7 @@ public partial class MainViewModel : ViewModelBase
         _NavigationService = new(_ConfigurationAndPlatformService);
         SelectedPage = Pages.FirstOrDefault();
     }
-    ConfigurationAndPlatformService _ConfigurationAndPlatformService { get; }
+    ConfigurationService _ConfigurationAndPlatformService { get; }
     NavigationService _NavigationService { get; }
 
     public ObservableCollection<ListItemTemplate> Pages { get; } =

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CharSheet3.Models;
+namespace CharSheet3.Structures;
 
 /// <summary>
 /// For calculating spell slots.

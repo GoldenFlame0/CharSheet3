@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CharSheet3.Services;
 /// <summary>
 /// This service handles two things: User config and platform-specific getters.
 /// </summary>
-public class ConfigurationAndPlatformService
+public class ConfigurationService
 {
-    public ConfigurationAndPlatformService() { }
+    public ConfigurationService() { }
 
     public string TestString { get; set; } = "This is a test string.";
 

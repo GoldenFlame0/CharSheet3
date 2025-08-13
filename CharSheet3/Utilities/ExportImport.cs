@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CharSheet3.Models;
+using CharSheet3.Structures;
 
 namespace CharSheet3.Utilities;
 

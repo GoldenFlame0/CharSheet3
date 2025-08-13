@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CharSheet3.Models;
 using CharSheet3.Services;
+using CharSheet3.Structures;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -19,7 +19,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
     [ObservableProperty]
     private Class5e selectedClass;
 
-    public ClassBuilderViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
+    public ClassBuilderViewModel(ConfigurationService configurationAndPlatformService)
     {
         _ConfigurationAndPlatformService = configurationAndPlatformService;
 
@@ -32,7 +32,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
         SelectedClass = ClassesList.First();
     }
 
-    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
+    ConfigurationService _ConfigurationAndPlatformService;
 
     [RelayCommand]
     public void AddClass()

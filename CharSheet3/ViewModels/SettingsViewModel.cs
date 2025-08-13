@@ -11,7 +11,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 namespace CharSheet3.ViewModels;
 public partial class SettingsViewModel : ViewModelBase
 {
-    public SettingsViewModel(ConfigurationAndPlatformService configurationAndPlatformService)
+    public SettingsViewModel(ConfigurationService configurationAndPlatformService)
     {
         // Initialize the properties with values from the settings service
         _ConfigurationAndPlatformService = configurationAndPlatformService;
@@ -19,5 +19,5 @@ public partial class SettingsViewModel : ViewModelBase
 
     }
 
-    ConfigurationAndPlatformService _ConfigurationAndPlatformService;
+    ConfigurationService _ConfigurationAndPlatformService;
 }
