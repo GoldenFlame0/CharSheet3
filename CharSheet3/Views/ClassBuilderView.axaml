@@ -5,7 +5,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
   x:Class="CharSheet3.Views.ClassBuilderView">
-  <Grid RowDefinitions="Auto,*,*" ColumnDefinitions="*,*">
+  <Grid RowDefinitions="Auto,*" ColumnDefinitions="auto,*">
     <Border Grid.Row="0" Background="{DynamicResource MenuBrush}" CornerRadius="0 0 12 0">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
         <Button Content="Add Class" Command="{Binding AddClassCommand}" Classes="TopBar"/>
@@ -23,10 +23,17 @@
         </DataTemplate>
       </ListBox.ItemTemplate>
     </ListBox>
-    <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
-      <TextBlock Text="Class Details" FontSize="16" FontWeight="Bold"/>
-      <TextBox Text="{Binding SelectedClass.Name}" />
+    <TextBlock
+      Grid.Column="1"
+      Text="Class Details"
+      FontSize="16"
+      FontWeight="Bold"
+      />
+    <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding !SelectedClass.IsSRD}">
+      <TextBox Text="{Binding SelectedClass.Name}"/>
       <TextBox Text="{Binding SelectedClass.Description}"/>
+      <TextBox Text="{Binding SelectedClass.CopyrightInfo}"/>
+      <TextBox Text="{Binding SelectedClass.HitDie}"/>
     </StackPanel>
   </Grid>
 </UserControl>

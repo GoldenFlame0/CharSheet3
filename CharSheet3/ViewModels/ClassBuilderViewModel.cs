@@ -51,6 +51,8 @@ public partial class ClassBuilderViewModel : ViewModelBase
     [ObservableProperty]
     private Class5e? selectedClass = null;
 
+    // todo handle duplicates.
+
     [RelayCommand]
     public void AddClass()
     {
