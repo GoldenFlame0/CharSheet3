@@ -2,17 +2,18 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using CharSheet3.Utilities;
+
+using static CharSheet3.Structures.FundamentalEnums5e;
 
 namespace CharSheet3.Controls;
 
 public partial class ProficiencyIndicator : UserControl
 {
-    public static readonly StyledProperty<Calculators.Proficiency> ProficiencyLevelProperty =
-        AvaloniaProperty.Register<ProficiencyIndicator, Calculators.Proficiency>(
-            nameof(ProficiencyLevel), defaultValue: Calculators.Proficiency.None);
+    public static readonly StyledProperty<Proficiency> ProficiencyLevelProperty =
+        AvaloniaProperty.Register<ProficiencyIndicator, Proficiency>(
+            nameof(ProficiencyLevel), defaultValue: Proficiency.None);
 
-    public Calculators.Proficiency ProficiencyLevel
+    public Proficiency ProficiencyLevel
     {
         get => GetValue(ProficiencyLevelProperty);
         set => SetValue(ProficiencyLevelProperty, value);
@@ -34,9 +35,9 @@ public partial class ProficiencyIndicator : UserControl
     {
         ProficiencyLevel = ProficiencyLevel switch
         {
-            Calculators.Proficiency.None => Calculators.Proficiency.Proficient,
-            Calculators.Proficiency.Proficient => Calculators.Proficiency.Expertise,
-            _ => Calculators.Proficiency.None
+            Proficiency.None => Proficiency.Proficient,
+            Proficiency.Proficient => Proficiency.Expertise,
+            _ => Proficiency.None
         };
     }
 
@@ -55,8 +56,8 @@ public partial class ProficiencyIndicator : UserControl
         }
         textBlock.Text = ProficiencyLevel switch
         {
-            Calculators.Proficiency.Proficient => "P",
-            Calculators.Proficiency.Expertise => "E",
+            Proficiency.Proficient => "P",
+            Proficiency.Expertise => "E",
             _ => "",
         };
     }

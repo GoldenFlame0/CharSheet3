@@ -3,18 +3,12 @@ using System.Collections.Generic;
 
 using CharSheet3.Structures;
 
+using static CharSheet3.Structures.FundamentalEnums5e;
+
 namespace CharSheet3.Utilities;
 
 public static class Calculators
 {
-    // TODO: this should probably go somewhere more relevant. Unsure where yet.
-    public enum Proficiency
-    {
-        None,
-        Proficient,
-        Expertise
-    }
-
     public static int CalculateModifier(int input)
     {
         return (int)Math.Floor(((double)input - 10) / 2); // Standard D&D 5e modifier calculation

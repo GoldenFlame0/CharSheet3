@@ -8,6 +8,7 @@ using CharSheet3.Structures;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+using static CharSheet3.Structures.FundamentalEnums5e;
 using static CharSheet3.Utilities.Calculators;
 
 namespace CharSheet3.ViewModels;

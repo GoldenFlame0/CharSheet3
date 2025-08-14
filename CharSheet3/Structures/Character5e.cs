@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using static CharSheet3.Structures.FundamentalEnums5e;
 using static CharSheet3.Utilities.Calculators;
 
 namespace CharSheet3.Structures;
