@@ -14,25 +14,42 @@ using CommunityToolkit.Mvvm.Input;
 namespace CharSheet3.ViewModels;
 public partial class ClassBuilderViewModel : ViewModelBase
 {
+    public ClassBuilderViewModel(CharacterClassDataService characterClassDataService)
+    {
+        _CharacterClassDataService = characterClassDataService;
+
+        ClassesList = new (_CharacterClassDataService.ClassList);
+        if (ClassesList.Count != 0)
+        {
+            SelectedClass = ClassesList.First();
+        }
+    }
+
+    public override void OnActivate()
+    {
+        base.OnActivate();
+        _CharacterClassDataService.LoadClassData();
+        ClassesList = new(_CharacterClassDataService.ClassList);
+        if (ClassesList.Count != 0)
+        {
+            SelectedClass = ClassesList.First();
+        }
+    }
+
+    public override void OnDeactivate()
+    {
+        base.OnDeactivate();
+        // Save classes to the data service when deactivating
+        _CharacterClassDataService.ClassList = [.. ClassesList];
+        _CharacterClassDataService.SaveClassData();
+    }
+
+    CharacterClassDataService _CharacterClassDataService;
+
     public ObservableCollection<Class5e> ClassesList { get; set; }
 
     [ObservableProperty]
-    private Class5e selectedClass;
-
-    public ClassBuilderViewModel(ConfigurationService configurationAndPlatformService)
-    {
-        _ConfigurationAndPlatformService = configurationAndPlatformService;
-
-        ClassesList = new ObservableCollection<Class5e>(
-        [
-            // Initialize with some default classes if needed
-            new Class5e { Name = "Fighter" },
-            new Class5e { Name = "Wizard" },
-        ]);
-        SelectedClass = ClassesList.First();
-    }
-
-    ConfigurationService _ConfigurationAndPlatformService;
+    private Class5e? selectedClass = null;
 
     [RelayCommand]
     public void AddClass()

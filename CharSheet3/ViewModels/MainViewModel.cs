@@ -18,15 +18,12 @@ public partial class MainViewModel : ViewModelBase
 {
     public MainViewModel()
     {
-        _ConfigurationAndPlatformService = new()
-        {
-            TestString = "This is a test string from the MainViewModel constructor."
-        };
-        _NavigationService = new(_ConfigurationAndPlatformService);
+        RegisterServices();
         SelectedPage = Pages.FirstOrDefault();
     }
-    ConfigurationService _ConfigurationAndPlatformService { get; }
-    NavigationService _NavigationService { get; }
+    private ConfigurationService _ConfigurationService;
+    private NavigationService _NavigationService;
+    private CharacterClassDataService _CharacterClassDataService;
 
     public ObservableCollection<ListItemTemplate> Pages { get; } =
     [
@@ -56,13 +53,32 @@ public partial class MainViewModel : ViewModelBase
         {
             return;
         }
+        CurrentPage?.OnDeactivate(); // Deactivate the old page if it exists
         CurrentPage = instance as ViewModelBase;
     }
 
     [RelayCommand]
-    public async Task ToggleSidebar()
+    public void ToggleSidebar()
     {
         IsSidebarOpen = !IsSidebarOpen;
+    }
+
+    /// <summary>
+    /// Create all the services.
+    /// This is where they live - viewmodels live in the NavigationService.
+    /// </summary>
+    public void RegisterServices()
+    {
+        _ConfigurationService = new()
+        {
+            // Make sure I'm not going nuts.
+            TestString = "This is a test string from the MainViewModel."
+        };
+
+        _CharacterClassDataService = new(_ConfigurationService);
+
+        // Poor nav service needs to know about everything else, since it holds the viewmodels.
+        _NavigationService = new(_CharacterClassDataService, _ConfigurationService);
     }
 }
 

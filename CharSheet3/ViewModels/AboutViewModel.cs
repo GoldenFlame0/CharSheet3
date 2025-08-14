@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using CharSheet3.Services;
+﻿using CharSheet3.Services;
+using CharSheet3.Utilities;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -15,7 +9,7 @@ public partial class AboutViewModel : ViewModelBase
     public AboutViewModel(ConfigurationService configurationAndPlatformService)
     {
         _ConfigurationAndPlatformService = configurationAndPlatformService;
-        OperatingSystemAndDistributionName = ConfigurationService.GetOperatingSystemAndDistributionName();
+        OperatingSystemAndDistributionName = PlatformInfo.GetOperatingSystemAndDistributionName();
         TestString = _ConfigurationAndPlatformService.TestString;
     }
 

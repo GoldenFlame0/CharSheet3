@@ -60,6 +60,7 @@ public static class Calculators
         /*21st*/ [  4u,  3u,  3u,  3u,  3u,  2u,  2u,  2u,  1u],
         /*22nd*/ [  4u,  3u,  3u,  3u,  3u,  2u,  2u,  2u,  2u],
         // I could keep going, but it'd be guesswork.
+        // TODO: build the table up to level 30.
     ];
 
     public static uint[] CalculateSpellSlots(List<Tuple<CasterType, uint>> characterClasses)

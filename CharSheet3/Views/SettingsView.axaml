@@ -3,9 +3,22 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:views="clr-namespace:CharSheet3.Views"
+  xmlns:vm="clr-namespace:CharSheet3.ViewModels"
+  xmlns:conv="clr-namespace:CharSheet3.Converters"
+  xmlns:ctrls="clr-namespace:CharSheet3.Controls"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-  x:Class="CharSheet3.Views.SettingsView">
-  <StackPanel Orientation="Vertical">
-    <TextBlock>Settings Page</TextBlock>
-  </StackPanel>
+  x:Class="CharSheet3.Views.SettingsView"
+  xmlns:services="using:CharSheet3.Services"
+  services:DialogManager.Register="{Binding}"
+  >
+  <!-- Todo make this autogenerate -->
+  <Grid Margin="5" ColumnDefinitions="auto, auto" RowDefinitions="auto, auto, auto">
+    <TextBlock Text="Settings Page" Grid.Row="0" Grid.ColumnSpan="2"/>
+    <TextBlock Text="Character builder data" Grid.Row="1" Grid.Column="0"/>
+    <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" Orientation="Horizontal">
+      <TextBox Text="{Binding ClassDataPath}"/>
+      <Button Content="Browse..." Margin="5,0,0,0" Command="{Binding BrowseClassDataCommand}"/>
+    </StackPanel>
+  </Grid>
 </UserControl>

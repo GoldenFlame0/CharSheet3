@@ -16,15 +16,21 @@ public partial class CharacterSheetViewModel : ViewModelBase
 {
     Character5e characterData;
 
-    public CharacterSheetViewModel(ConfigurationService configurationAndPlatformService)
+    public CharacterSheetViewModel
+    (
+        ConfigurationService configurationService,
+        CharacterClassDataService characterClassDataService
+    )
     {
-        _ConfigurationAndPlatformService = configurationAndPlatformService;
+        _CharacterClassDataService = characterClassDataService;
+        _ConfigurationService = configurationService;
 
         characterData = new();
         UpdateAllFromModel();
     }
 
-    ConfigurationService _ConfigurationAndPlatformService;
+    CharacterClassDataService _CharacterClassDataService;
+    ConfigurationService _ConfigurationService;
 
     #region Properties
     #region Top-Level Character Data
@@ -383,7 +389,7 @@ public partial class CharacterSheetViewModel : ViewModelBase
             Console.WriteLine("No file selected for loading character data.");
             return;
         }
-        Character5e? loadedCharacter = Utilities.ExportImport.ImportFromXmlFile<Character5e?>(location.First());
+        Character5e? loadedCharacter = Utilities.ExportImport.ImportFromXmlFileSafe<Character5e?>(location.First());
         if (loadedCharacter != null)
         {
             characterData = loadedCharacter;

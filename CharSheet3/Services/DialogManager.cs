@@ -126,6 +126,27 @@ public static class DialogHelper
         return storageFiles.Select(s => s.TryGetLocalPath() ?? string.Empty);
     }
 
+    public static async Task<IEnumerable<string>?> OpenFolderDialogAsync(this object? context, string? title = null)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        // lookup the TopLevel for the context
+        var topLevel = DialogManager.GetTopLevelForContext(context);
+        if (topLevel is null)
+        {
+            return null; // No TopLevel found, cannot open dialog
+        }
+        // Open the folder dialog
+        var storageFolders = await topLevel.StorageProvider.OpenFolderPickerAsync
+        (
+            new FolderPickerOpenOptions()
+            {
+                Title = title ?? "Select a folder"
+            }
+        );
+        // return the result
+        return storageFolders.Select(s => s.TryGetLocalPath() ?? string.Empty);
+    }
+
     public static async Task<string> OpenSaveDialogAsync(this object? context, string? title = null, string suggestedName = "", string defaultExtension = "")
     {
         ArgumentNullException.ThrowIfNull(context);

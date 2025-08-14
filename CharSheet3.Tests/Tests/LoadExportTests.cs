@@ -10,7 +10,7 @@ public class LoadExportTests
     private static Character5e LoadFromPremadeFile(string fileName)
     {
         string filePath = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles", fileName);
-        return ExportImport.ImportFromXmlFile<Character5e>(filePath) ?? throw new FileNotFoundException($"File {fileName} not found or could not be loaded.");
+        return ExportImport.ImportFromXmlFileSafe<Character5e>(filePath) ?? throw new FileNotFoundException($"File {fileName} not found or could not be loaded.");
     }
 
     [Fact]

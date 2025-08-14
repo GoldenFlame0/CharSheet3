@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using CharSheet3.Structures;
 
@@ -16,6 +12,7 @@ public static class ExportImport
 
     /// <summary>
     /// Does what it says on the tin.
+    /// TODO: Add non-overwrite option.
     /// </summary>
     public static bool ExportToXmlFile<T>(T input, string filePath)
     {
@@ -35,8 +32,10 @@ public static class ExportImport
 
     /// <summary>
     /// Does what it says on the tin.
+    /// Safe version that checks for file existence and handles exceptions.
+    /// TODO: I bet $5 there's some security issue here.
     /// </summary>
-    public static T? ImportFromXmlFile<T>(string filePath)
+    public static T? ImportFromXmlFileSafe<T>(string filePath)
     {
         if (string.IsNullOrEmpty(filePath) || !System.IO.File.Exists(filePath))
         {
@@ -46,7 +45,7 @@ public static class ExportImport
 
         try
         {
-            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Character5e));
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
             using var reader = new System.IO.StreamReader(filePath);
             return (T?)serializer.Deserialize(reader);
         }

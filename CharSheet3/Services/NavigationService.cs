@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 using CharSheet3.ViewModels;
 
@@ -11,26 +12,43 @@ namespace CharSheet3.Services;
 /// </summary>
 public class NavigationService()
 {
-    private readonly Dictionary<Type, ViewModelBase> _viewModelInstances = [];
-
-    public NavigationService(ConfigurationService configurationAndPlatformService) : this()
+    public NavigationService
+    (
+        CharacterClassDataService characterClassDataService,
+        ConfigurationService configurationService
+    ) : this()
     {
-        _ConfigurationAndPlatformService = configurationAndPlatformService;
+        _CharacterClassDataService = characterClassDataService;
+        _ConfigurationService = configurationService;
+        BuildViewModels();
     }
 
-    private readonly ConfigurationService? _ConfigurationAndPlatformService;
+    private CharacterClassDataService _CharacterClassDataService;
+    private ConfigurationService _ConfigurationService;
+
+    private readonly Dictionary<Type, ViewModelBase> _viewModelInstances = [];
+
+    private void BuildViewModels()
+    {
+        _viewModelInstances.Add(typeof(CharacterSheetViewModel), new CharacterSheetViewModel(_ConfigurationService, _CharacterClassDataService));
+        _viewModelInstances.Add(typeof(ClassBuilderViewModel), new ClassBuilderViewModel(_CharacterClassDataService));
+    }
 
     public ViewModelBase? GetViewModel(Type viewModelType)
     {
         if (_viewModelInstances.TryGetValue(viewModelType, out var viewModel))
         {
+            viewModel.OnActivate(); // Activate the ViewModel if it exists
             return viewModel;
         }
+        // Stuff below shouldn't be needed.
+
         // If the ViewModel is not found, create a new instance and store it
-        viewModel = (ViewModelBase)Activator.CreateInstance(viewModelType, [_ConfigurationAndPlatformService])!;
+        viewModel = (ViewModelBase)Activator.CreateInstance(viewModelType, [_ConfigurationService])!;
 
         // Store the new instance in the dictionary
         _viewModelInstances[viewModelType] = viewModel;
+        viewModel.OnActivate();
         return viewModel;
     }
 }
