@@ -7,6 +7,7 @@ namespace CharSheet3.Utilities;
 
 public static class Calculators
 {
+    // TODO: this should probably go somewhere more relevant. Unsure where yet.
     public enum Proficiency
     {
         None,

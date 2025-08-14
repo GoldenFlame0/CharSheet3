@@ -44,11 +44,11 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     [ObservableProperty]
     private int level;
-    partial void OnLevelChanged(int value)
-    {
-        characterData.Level = value;
-        UpdateAllFromModel();
-    }
+    //partial void OnLevelChanged(int value)
+    //{
+    //    characterData.Level = value;
+    //    UpdateAllFromModel();
+    //}
 
     #endregion
 

@@ -28,6 +28,12 @@ public enum MagicOrigin
     Psionic,
 }
 
+public enum Edition
+{
+    OriginalRelease,
+    TwentyTwentyFour
+}
+
 /// <summary>
 /// Record-only class type for selecting in the character sheet and going in the builder.
 /// Choices become part of the character object.
@@ -35,18 +41,22 @@ public enum MagicOrigin
 public class Class5e
 {
     public string Name { get; set; } = "New Class";
+    public Edition Edition { get; set; } = Edition.TwentyTwentyFour;
     public string Description { get; set; } = "Class description goes here.";
+    public bool IsSRD { get; set; } = false; // True if this is a standard SRD class, false if it's homebrew.
     public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public int HitDie { get; set; } = 8; // Default to D8
     public CasterType CasterType { get; set; } = CasterType.None; // Default to no magic caster
     public List<ClassFeature5e> Features { get; set; } = [];
-    public List<Subclass5e> Subclasses { get; set; } = [];
 }
 
 public class Subclass5e
 {
     public string Name { get; set; } = "New Subclass";
+    public Edition Edition { get; set; } = Edition.TwentyTwentyFour;
+    public string ParentClass { get; set; } = "New Class"; // The class this subclass belongs to.
     public string Description { get; set; } = "Class description goes here.";
+    public bool IsSRD { get; set; } = false; // True if this is a standard SRD subclass, false if it's homebrew.
     public string CopyrightInfo { get; set; } = "Insert Authorship Here";
     public bool AddsCasting { get; set; } = false; // Defines if the PC becomes a subclass caster or not.
     public List<ClassFeature5e> Features { get; set; } = [];

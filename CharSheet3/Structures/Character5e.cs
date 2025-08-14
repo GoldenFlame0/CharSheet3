@@ -11,8 +11,19 @@ namespace CharSheet3.Structures;
 public class Character5e
 {
     public string CharacterName { get; set; } = "New Character";
-    public int Level { get; set; } = 1;
-    public List<KeyValuePair<string, int>> Classes { get; set; } = []; // Class name and level pairs
+    public int Level
+    {
+        get
+        {
+            uint output = 0;
+            foreach (var classPair in Classes)
+            {
+                output += classPair.Value; // Sum the levels of all classes
+            }
+            return (int)output;
+        }
+    }
+    public List<KeyValuePair<string, uint>> Classes { get; set; } = []; // Class name and level pairs
 
     #region Ability Scores
     public int StrengthScore { get; set; } = 10;
