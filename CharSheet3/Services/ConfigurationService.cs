@@ -13,9 +13,9 @@ public class ConfigurationService
     {
         CharacterClassDataPath = Environment.OSVersion.Platform switch
         {
-            PlatformID.Win32NT => "C:\\tmp",
-            PlatformID.Unix => "~//tmp",
-            _ => "/tmp",
+            PlatformID.Win32NT => "C:\\tmp\\",
+            PlatformID.Unix => "~/tmp/",
+            _ => "/tmp/",
         };
     }
 

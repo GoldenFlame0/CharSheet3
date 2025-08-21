@@ -188,17 +188,17 @@ public class CharacterClassDataService
             return;
         }
 
-        string parentClassFolder = Path.Combine(classDataPath, "Classes");
+        string parentClassFolder = Path.Combine(classDataPath, "classes");
         if (!Directory.Exists(parentClassFolder))
         {
-            Console.WriteLine($"The directory {parentClassFolder} does not exist. No class data will be loaded.");
-            return;
+            Console.WriteLine($"The directory {parentClassFolder} does not exist.");
+            Directory.CreateDirectory(parentClassFolder);
         }
-        string subclassFolder = Path.Combine(classDataPath, "Subclasses");
+        string subclassFolder = Path.Combine(classDataPath, "subclasses");
         if (!Directory.Exists(subclassFolder))
         {
-            Console.WriteLine($"The directory {subclassFolder} does not exist. No subclass data will be loaded.");
-            return;
+            Console.WriteLine($"The directory {subclassFolder} does not exist.");
+            Directory.CreateDirectory(subclassFolder);
         }
 
         foreach (var file in Directory.GetFiles(subclassFolder, "*.xml"))
@@ -230,14 +230,19 @@ public class CharacterClassDataService
     public void SaveClassData()
     {
         string classDataPath = _ConfigurationService.CharacterClassDataPath;
-        if (string.IsNullOrEmpty(classDataPath) || !Directory.Exists(classDataPath))
+        if (string.IsNullOrEmpty(classDataPath))
         {
-            Console.WriteLine("Character class data path is not set or does not exist.");
+            Console.WriteLine("Character class data path is not set.");
+            return;
+        }
+        if (!Directory.Exists(classDataPath))
+        {
+            Console.WriteLine($"Character class data path {classDataPath} does not exist.");
             return;
         }
         foreach (var classData in homebrewClasses)
         {
-            string filePath = Path.Combine(classDataPath, $"{classData.Name}.xml");
+            string filePath = Path.Combine(classDataPath, "classes", $"{classData.Name}.xml");
             if (File.Exists(filePath))
             {
                 File.Delete(filePath); // Remove old file if it exists
@@ -245,6 +250,18 @@ public class CharacterClassDataService
             if (!ExportImport.ExportToXmlFile(classData, filePath))
             {
                 Console.WriteLine($"Failed to save class data for {classData.Name} to {filePath}.");
+            }
+        }
+        foreach (var subclassData in homebrewSubclasses)
+        {
+            string filePath = Path.Combine(classDataPath, "subclasses", $"{subclassData.Name}.xml");
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath); // Remove old file if it exists
+            }
+            if (!ExportImport.ExportToXmlFile(subclassData, filePath))
+            {
+                Console.WriteLine($"Failed to save subclass data for {subclassData.Name} to {filePath}.");
             }
         }
     }

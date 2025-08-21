@@ -112,7 +112,7 @@
        </ListBox.ItemTemplate>
        </ListBox>
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-        <Button Content="Add Subclass" Command="{Binding AddClassCommand}" Classes="TopBar"/>
+        <Button Content="Add Subclass" Command="{Binding AddSubclassCommand}" Classes="TopBar"/>
       </StackPanel>
     </StackPanel>
     <!-- Selected Subclass Info -->

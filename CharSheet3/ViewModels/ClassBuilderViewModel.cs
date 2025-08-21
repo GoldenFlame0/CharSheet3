@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 namespace CharSheet3.ViewModels;
+
 public partial class ClassBuilderViewModel : ViewModelBase
 {
     public ClassBuilderViewModel(CharacterClassDataService characterClassDataService)
@@ -41,6 +42,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
         base.OnDeactivate();
         // Save classes to the data service when deactivating
         _CharacterClassDataService.AddToClassList([.. ClassesList]);
+
         _CharacterClassDataService.SaveClassData();
     }
 
@@ -55,7 +57,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
 
     partial void OnSelectedClassChanged(Class5e? value)
     {
-        SubclassesList = new (_CharacterClassDataService.GetSubclassList(value?.Name ?? string.Empty));
+        SubclassesList = new(_CharacterClassDataService.GetSubclassList(value?.Name ?? string.Empty));
         SelectedSubclass = SubclassesList.FirstOrDefault();
     }
 
@@ -68,6 +70,16 @@ public partial class ClassBuilderViewModel : ViewModelBase
         ClassesList.Add(new Class5e
         {
             Name = "New Class"
+        });
+    }
+
+    [RelayCommand]
+    public void AddSubclass()
+    {
+        SubclassesList.Add(new Subclass5e
+        {
+            Name = "New Subclass",
+            ParentClass = SelectedClass != null ? SelectedClass.Name : string.Empty
         });
     }
 }
