@@ -3,37 +3,155 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-  x:Class="CharSheet3.Views.ClassBuilderView">
-  <Grid RowDefinitions="Auto,*" ColumnDefinitions="auto,*">
-    <Border Grid.Row="0" Background="{DynamicResource MenuBrush}" CornerRadius="0 0 12 0">
+  mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="450"
+  x:Class="CharSheet3.Views.ClassBuilderView"
+  >
+  <UserControl.Styles>
+    <Style Selector="StackPanel.FieldBox">
+      <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+  </UserControl.Styles>
+  <!-- Using grid to control ratios here. -->
+  <Grid ColumnDefinitions="auto, *, auto, *">
+    <!-- List of all classes + controls to manipulate. -->
+    <StackPanel Orientation="Vertical" Grid.Column="0">
+      <ListBox
+        ItemsSource="{Binding ClassesList}"
+        Margin="5"
+        SelectedItem="{Binding SelectedClass}"
+        >
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Name}" Margin="5"/>
+              <Button Content="Delete" IsEnabled="{Binding !IsSRD}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
         <Button Content="Add Class" Command="{Binding AddClassCommand}" Classes="TopBar"/>
-        <Button Content="Sort" Command="{Binding SortClassesCommand}" Classes="TopBar"/>
       </StackPanel>
-    </Border>
-    <ListBox Grid.Row="1" ItemsSource="{Binding ClassesList}" Margin="5" SelectedItem="{Binding SelectedClass}">
-      <ListBox.ItemTemplate>
-        <DataTemplate>
-          <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Name}" Margin="5" Width="80"/>
-            <Button Content="Rename"/>
-            <Button Content="Delete"/>
-          </StackPanel>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
-    <TextBlock
+    </StackPanel>
+    <!-- Selected Class Info -->
+    <StackPanel
+      Margin="5"
+      IsEnabled="{Binding !SelectedClass.IsSRD}"
+      Orientation="Vertical"
       Grid.Column="1"
-      Text="Class Details"
-      FontSize="16"
-      FontWeight="Bold"
-      />
-    <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding !SelectedClass.IsSRD}">
-      <TextBox Text="{Binding SelectedClass.Name}"/>
-      <TextBox Text="{Binding SelectedClass.Description}"/>
-      <TextBox Text="{Binding SelectedClass.CopyrightInfo}"/>
-      <TextBox Text="{Binding SelectedClass.HitDie}"/>
+      >
+      <StackPanel Orientation="Vertical">
+        <TextBox Text="{Binding SelectedClass.Name}" TextWrapping="Wrap"/>
+        <TextBlock Text="Description:" Margin="5"/>
+        <TextBox Text="{Binding SelectedClass.Description}" TextWrapping="Wrap"/>
+      </StackPanel>
+      <Grid
+        Grid.Column="1"
+        Grid.Row="0"
+        ColumnDefinitions="auto, auto"
+        RowDefinitions="*, *, *, *">
+        <TextBlock Text="Primary Ability:" Margin="5" Grid.Row="0" Grid.Column="0"/>
+        <ComboBox
+          Grid.Row="0"
+          Grid.Column="1"
+          SelectedItem="{Binding SelectedClass.PrimaryAbility}"
+          ItemsSource="{Binding AbilitiesList}"
+          Margin="5"/>
+        <TextBlock Grid.Row="1" Text="Hit Dice:" Margin="5"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+          <TextBlock Text="D" Margin="5"/>
+          <TextBox Text="{Binding SelectedClass.HitDie}"/>
+          <TextBlock Text="Per level" Margin="5"/>
+        </StackPanel>
+        <TextBlock Text="Class Group:" Margin="5" Grid.Row="2"/>
+        <ComboBox
+          Grid.Row="2"
+          Grid.Column="1"
+          SelectedItem="{Binding SelectedClass.ClassGroup}"
+          ItemsSource="{Binding ClassGroupsList}"
+          Margin="5"/>
+      </Grid>
+      <ListBox
+        ItemsSource="{Binding SelectedClass.Features}"
+        Margin="5"
+        >
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Vertical">
+              <TextBlock Text="{Binding Name}" Margin="5"/>
+              <TextBlock Text="{Binding Description}" Margin="5"/>
+              <Button Content="Delete" Command="{Binding DataContext.RemoveAbilityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+        <Button Content="Add Ability" Command="{Binding AddAbilityCommand}"/>
+      </ListBox>
+      <StackPanel Orientation="Vertical" Grid.Row="3" Grid.ColumnSpan="2">
+        <TextBlock Text="Copyright Information:" Margin="5"/>
+        <TextBox Text="{Binding SelectedClass.CopyrightInfo}" TextWrapping="Wrap" Height="70"/>
+      </StackPanel>
+    </StackPanel>
+    <!-- Subclasses -->
+    <StackPanel
+      Orientation="Vertical"
+      Grid.Column="2"
+      >
+      <ListBox
+        ItemsSource="{Binding SubclassesList}"
+        Margin="5"
+        SelectedItem="{Binding SelectedSubclass}"
+        >
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Name}" Margin="5"/>
+              <Button Content="Delete" IsEnabled="{Binding !IsSRD}"/>
+            </StackPanel>
+          </DataTemplate>
+       </ListBox.ItemTemplate>
+       </ListBox>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <Button Content="Add Subclass" Command="{Binding AddClassCommand}" Classes="TopBar"/>
+      </StackPanel>
+    </StackPanel>
+    <!-- Selected Subclass Info -->
+    <StackPanel
+      Margin="5"
+      IsEnabled="{Binding !SelectedSubclass.IsSRD}"
+      Orientation="Vertical"
+      Grid.Column="3"
+      >
+      <StackPanel Orientation="Vertical">
+        <TextBox Text="{Binding SelectedSubclass.Name}" TextWrapping="Wrap"/>
+        <TextBlock Text="Description:" Margin="5"/>
+        <TextBox Text="{Binding SelectedSubclass.Description}" TextWrapping="Wrap"/>
+      </StackPanel>
+      <Grid
+        ColumnDefinitions="auto, auto"
+        RowDefinitions="*, *">
+        <TextBlock Text="Adds Casting:" Margin="5" Grid.Row="1" Grid.Column="0"/>
+        <CheckBox IsChecked="{Binding SelectedSubclass.AddsCasting}" Margin="5" Grid.Row="1" Grid.Column="1"/>
+      </Grid>
+      <ListBox
+        ItemsSource="{Binding SelectedSubclass.Features}"
+        Margin="5"
+        >
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Vertical">
+              <TextBlock Text="{Binding Name}" Margin="5"/>
+              <TextBlock Text="{Binding Description}" Margin="5"/>
+              <Button Content="Delete" Command="{Binding DataContext.RemoveAbilityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+        <Button Content="Add Feature" Command="{Binding AddAbilityCommand}"/>
+      </ListBox>
+      <StackPanel Orientation="Vertical">
+        <TextBlock Text="Copyright Information:" Margin="5"/>
+        <TextBox Text="{Binding SelectedSubclass.CopyrightInfo}" TextWrapping="Wrap" Height="70"/>
+      </StackPanel>
     </StackPanel>
   </Grid>
 </UserControl>

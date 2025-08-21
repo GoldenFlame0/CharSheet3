@@ -9,7 +9,15 @@ namespace CharSheet3.Services;
 /// </summary>
 public class ConfigurationService
 {
-    public ConfigurationService() { }
+    public ConfigurationService()
+    {
+        CharacterClassDataPath = Environment.OSVersion.Platform switch
+        {
+            PlatformID.Win32NT => "C:\\tmp",
+            PlatformID.Unix => "~//tmp",
+            _ => "/tmp",
+        };
+    }
 
     public string TestString { get; set; } = "This is a test string.";
 

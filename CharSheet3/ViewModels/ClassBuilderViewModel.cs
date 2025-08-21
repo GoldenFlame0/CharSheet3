@@ -18,7 +18,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
     {
         _CharacterClassDataService = characterClassDataService;
 
-        ClassesList = new (_CharacterClassDataService.ClassList);
+        ClassesList = new(_CharacterClassDataService.GetClassList());
         if (ClassesList.Count != 0)
         {
             SelectedClass = ClassesList.First();
@@ -29,7 +29,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
     {
         base.OnActivate();
         _CharacterClassDataService.LoadClassData();
-        ClassesList = new(_CharacterClassDataService.ClassList);
+        ClassesList = new(_CharacterClassDataService.GetClassList());
         if (ClassesList.Count != 0)
         {
             SelectedClass = ClassesList.First();
@@ -40,7 +40,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
     {
         base.OnDeactivate();
         // Save classes to the data service when deactivating
-        _CharacterClassDataService.ClassList = [.. ClassesList];
+        _CharacterClassDataService.AddToClassList([.. ClassesList]);
         _CharacterClassDataService.SaveClassData();
     }
 
@@ -48,10 +48,19 @@ public partial class ClassBuilderViewModel : ViewModelBase
 
     public ObservableCollection<Class5e> ClassesList { get; set; }
 
+    public ObservableCollection<Subclass5e> SubclassesList { get; set; }
+
     [ObservableProperty]
     private Class5e? selectedClass = null;
 
-    // todo handle duplicates.
+    partial void OnSelectedClassChanged(Class5e? value)
+    {
+        SubclassesList = new (_CharacterClassDataService.GetSubclassList(value?.Name ?? string.Empty));
+        SelectedSubclass = SubclassesList.FirstOrDefault();
+    }
+
+    [ObservableProperty]
+    private Subclass5e? selectedSubclass = null;
 
     [RelayCommand]
     public void AddClass()
@@ -60,16 +69,5 @@ public partial class ClassBuilderViewModel : ViewModelBase
         {
             Name = "New Class"
         });
-    }
-
-    [RelayCommand]
-    public void SortClasses()
-    {
-        var sortedList = ClassesList.OrderBy(c => c.Name).ToList();
-        ClassesList.Clear();
-        foreach (var cls in sortedList)
-        {
-            ClassesList.Add(cls);
-        }
     }
 }
