@@ -59,10 +59,59 @@ public partial class ClassBuilderViewModel : ViewModelBase
     {
         SubclassesList = new(_CharacterClassDataService.GetSubclassList(value?.Name ?? string.Empty));
         SelectedSubclass = SubclassesList.FirstOrDefault();
+        SelectedClassFeatures = new(value?.Features ?? []);
+    }
+
+    ObservableCollection<ClassFeature5e> SelectedClassFeatures
+    {
+        get
+        {
+            if (SelectedClass == null)
+            {
+                return [];
+            }
+            return new(SelectedClass.Features);
+        }
+        set
+        {
+            if (SelectedClass != null)
+            {
+                SelectedClass.Features = [.. value];
+            }
+        }
     }
 
     [ObservableProperty]
     private Subclass5e? selectedSubclass = null;
+
+    partial void OnSelectedSubclassChanged(Subclass5e? value)
+    {
+        if (value == null)
+        {
+            SelectedSubclassFeatures = [];
+            return;
+        }
+        SelectedSubclassFeatures = new(value.Features);
+    }
+
+    ObservableCollection<ClassFeature5e> SelectedSubclassFeatures
+    {
+        get
+        {
+            if (SelectedSubclass == null)
+            {
+                return [];
+            }
+            return new(SelectedSubclass.Features);
+        }
+        set
+        {
+            if (SelectedSubclass != null)
+            {
+                SelectedSubclass.Features = [.. value];
+            }
+        }
+    }
 
     [RelayCommand]
     public void AddClass()

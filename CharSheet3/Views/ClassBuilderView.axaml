@@ -11,6 +11,12 @@
       <Setter Property="Orientation" Value="Horizontal"/>
       <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
+    <Style Selector="TextBox.Standard">
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <Style Selector="TextBlock.Standard">
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
   </UserControl.Styles>
   <!-- Using grid to control ratios here. -->
   <Grid ColumnDefinitions="auto, *, auto, *">
@@ -73,23 +79,23 @@
           Margin="5"/>
       </Grid>
       <ListBox
-        ItemsSource="{Binding SelectedClass.Features}"
+        ItemsSource="{Binding SelectedClassFeatures}"
         Margin="5"
         >
         <ListBox.ItemTemplate>
           <DataTemplate>
             <StackPanel Orientation="Vertical">
-              <TextBlock Text="{Binding Name}" Margin="5"/>
-              <TextBlock Text="{Binding Description}" Margin="5"/>
-              <Button Content="Delete" Command="{Binding DataContext.RemoveAbilityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+              <TextBox Text="{Binding Name}" Margin="5" Classes="Standard"/>
+              <TextBox Text="{Binding Description}" Margin="5" Classes="Standard"/>
+              <Button Content="Delete"/>
             </StackPanel>
           </DataTemplate>
         </ListBox.ItemTemplate>
-        <Button Content="Add Ability" Command="{Binding AddAbilityCommand}"/>
       </ListBox>
+      <Button Content="Add Feature" Command="{Binding AddClassFeatureCommand}"/>
       <StackPanel Orientation="Vertical" Grid.Row="3" Grid.ColumnSpan="2">
         <TextBlock Text="Copyright Information:" Margin="5"/>
-        <TextBox Text="{Binding SelectedClass.CopyrightInfo}" TextWrapping="Wrap" Height="70"/>
+        <TextBox Text="{Binding SelectedClass.CopyrightInfo}" Classes="Standard"/>
       </StackPanel>
     </StackPanel>
     <!-- Subclasses -->
@@ -134,23 +140,23 @@
         <CheckBox IsChecked="{Binding SelectedSubclass.AddsCasting}" Margin="5" Grid.Row="1" Grid.Column="1"/>
       </Grid>
       <ListBox
-        ItemsSource="{Binding SelectedSubclass.Features}"
+        ItemsSource="{Binding SelectedSubclassFeatures}"
         Margin="5"
         >
         <ListBox.ItemTemplate>
           <DataTemplate>
             <StackPanel Orientation="Vertical">
-              <TextBlock Text="{Binding Name}" Margin="5"/>
-              <TextBlock Text="{Binding Description}" Margin="5"/>
-              <Button Content="Delete" Command="{Binding DataContext.RemoveAbilityCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+              <TextBox Text="{Binding Name}" Margin="5" Classes="Standard"/>
+              <TextBox Text="{Binding Description}" Margin="5" Classes="Standard"/>
+              <Button Content="Delete"/>
             </StackPanel>
           </DataTemplate>
         </ListBox.ItemTemplate>
-        <Button Content="Add Feature" Command="{Binding AddAbilityCommand}"/>
       </ListBox>
+      <Button Content="Add Feature" Command="{Binding AddSubclassFeatureCommand}"/>
       <StackPanel Orientation="Vertical">
         <TextBlock Text="Copyright Information:" Margin="5"/>
-        <TextBox Text="{Binding SelectedSubclass.CopyrightInfo}" TextWrapping="Wrap" Height="70"/>
+        <TextBox Text="{Binding SelectedSubclass.CopyrightInfo}" Classes="Standard"/>
       </StackPanel>
     </StackPanel>
   </Grid>

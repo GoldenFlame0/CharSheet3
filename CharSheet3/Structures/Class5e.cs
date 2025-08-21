@@ -116,6 +116,6 @@ public class ClassFeature5e : ObservableObject
     /// <summary>
     /// Description of the feature. Each line is a separate string in the list.
     /// </summary>
-    public ObservableCollection<string> Description { get; set; } = ["Feature description goes here."];
+    public string Description { get; set; } = "Feature description goes here.";
     public int Level { get; set; } = 1;
 }

@@ -36,19 +36,19 @@ public class CharacterClassDataService
                 new ClassFeature5e
                 {
                     Name = "Rage",
-                    Description = ["You can imbue yourself with a primal power called Rage, a force that grants you extraordinary might and resilience. You can enter it as a Bonus Action if you aren’t wearing Heavy armor. You can enter your Rage the number of times shown for your Barbarian level in the Rages column of the Barbarian Features table. You regain one expended use when you finish a Short Rest, and you regain all expended uses when you finish a Long Rest. While active, your Rage grants the following benefits:", "You have resistance to Piercing, Slashing, and Bludgeoning damage.", "Whenever you make an attack using a Strength - with either a weapon or an Unarmed Strike - and deal damage to the target, you gain a bonus to that damage that increases as you gain levels as a Barbarian, as shown in the Rage Damage column of the Barbarian Features Table."],
+                    Description = "You can imbue yourself with a primal power called Rage, a force that grants you extraordinary might and resilience. You can enter it as a Bonus Action if you aren’t wearing Heavy armor. You can enter your Rage the number of times shown for your Barbarian level in the Rages column of the Barbarian Features table. You regain one expended use when you finish a Short Rest, and you regain all expended uses when you finish a Long Rest. While active, your Rage grants the following benefits: You have resistance to Piercing, Slashing, and Bludgeoning damage. Whenever you make an attack using a Strength - with either a weapon or an Unarmed Strike - and deal damage to the target, you gain a bonus to that damage that increases as you gain levels as a Barbarian, as shown in the Rage Damage column of the Barbarian Features Table.",
                     Level = 1
                 },
                 new ClassFeature5e
                 {
                     Name = "Unarmored Defense",
-                    Description = ["While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier."],
+                    Description = "While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier.",
                     Level = 1
                 },
                 new ClassFeature5e
                 {
                     Name = "Reckless Attack",
-                    Description = ["When you make your first attack on your turn, you can choose to gain advantage on all melee weapon attack rolls using Strength during that turn, but attack rolls against you have advantage until your next turn."],
+                    Description = "When you make your first attack on your turn, you can choose to gain advantage on all melee weapon attack rolls using Strength during that turn, but attack rolls against you have advantage until your next turn.",
                     Level = 2
                 },
             ],
@@ -69,13 +69,13 @@ public class CharacterClassDataService
                 new ClassFeature5e
                 {
                     Name = "Frenzy",
-                    Description = ["Starting at 3rd level, you can go into a Frenzy when you Rage. If you do so, for the duration of your Rage, you can make a single melee weapon attack as a Bonus Action on each of your turns after this one."],
+                    Description = "Starting at 3rd level, you can go into a Frenzy when you Rage. If you do so, for the duration of your Rage, you can make a single melee weapon attack as a Bonus Action on each of your turns after this one.",
                     Level = 3
                 },
                 new ClassFeature5e
                 {
                     Name = "Mindless Rage",
-                    Description = ["Beginning at 6th level, you cannot be charmed or frightened while raging."],
+                    Description = "Beginning at 6th level, you cannot be charmed or frightened while raging.",
                     Level = 6
                 },
             ],
