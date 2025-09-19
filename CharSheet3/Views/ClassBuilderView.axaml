@@ -28,10 +28,13 @@
       <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
   </UserControl.Styles>
+  <UserControl.Resources>
+    
+  </UserControl.Resources>
   <!-- Using grid to control ratios here. -->
   <Grid ColumnDefinitions="auto, *, auto, *">
     <!-- List of all classes + controls to manipulate. -->
-    <Grid RowDefinitions="auto, auto" Grid.Column="0">
+    <Grid RowDefinitions="*, auto" Grid.Column="0">
       <ListBox
         ItemsSource="{Binding ClassesList}"
         SelectedItem="{Binding SelectedClass}"
@@ -89,7 +92,7 @@
           Grid.Row="2"
           Grid.Column="1"
           SelectedItem="{Binding SelectedClass.ClassGroup}"
-          ItemsSource="{Binding ClassGroupsList}"
+          
           Margin="5"/>
       </Grid>
       <ListBox
@@ -119,7 +122,7 @@
     </Grid>
     <!-- Subclasses -->
     <Grid
-      RowDefinitions="auto, auto"
+      RowDefinitions="*, auto"
       Grid.Column="2"
       >
       <ListBox

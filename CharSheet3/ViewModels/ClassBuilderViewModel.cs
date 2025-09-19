@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Avalonia.Controls;
+
 using CharSheet3.Services;
 using CharSheet3.Structures;
 
@@ -46,6 +48,9 @@ public partial class ClassBuilderViewModel : ViewModelBase
         _CharacterClassDataService.SaveClassData();
     }
 
+    #region enums
+    #endregion
+
     CharacterClassDataService _CharacterClassDataService;
 
     public ObservableCollection<Class5e> ClassesList { get; set; }
@@ -57,29 +62,13 @@ public partial class ClassBuilderViewModel : ViewModelBase
 
     partial void OnSelectedClassChanged(Class5e? value)
     {
+        SelectedClassFeatures = new(value?.Features ?? []);
+
         SubclassesList = new(_CharacterClassDataService.GetSubclassList(value?.Name ?? string.Empty));
         SelectedSubclass = SubclassesList.FirstOrDefault();
-        SelectedClassFeatures = new(value?.Features ?? []);
     }
 
-    ObservableCollection<ClassFeature5e> SelectedClassFeatures
-    {
-        get
-        {
-            if (SelectedClass == null)
-            {
-                return [];
-            }
-            return new(SelectedClass.Features);
-        }
-        set
-        {
-            if (SelectedClass != null)
-            {
-                SelectedClass.Features = [.. value];
-            }
-        }
-    }
+    ObservableCollection<ClassFeature5e> SelectedClassFeatures { get; set; } = [];
 
     [ObservableProperty]
     private Subclass5e? selectedSubclass = null;
@@ -94,24 +83,7 @@ public partial class ClassBuilderViewModel : ViewModelBase
         SelectedSubclassFeatures = new(value.Features);
     }
 
-    ObservableCollection<ClassFeature5e> SelectedSubclassFeatures
-    {
-        get
-        {
-            if (SelectedSubclass == null)
-            {
-                return [];
-            }
-            return new(SelectedSubclass.Features);
-        }
-        set
-        {
-            if (SelectedSubclass != null)
-            {
-                SelectedSubclass.Features = [.. value];
-            }
-        }
-    }
+    ObservableCollection<ClassFeature5e> SelectedSubclassFeatures { get; set; } = [];
 
     [RelayCommand]
     public void AddClass()

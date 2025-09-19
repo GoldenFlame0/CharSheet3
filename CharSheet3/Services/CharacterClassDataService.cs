@@ -32,6 +32,7 @@ public class CharacterClassDataService
             IsSRD = true,
             CopyrightInfo = SRDFiveTwoOneCopyrightInfo,
             HitDie = 12,
+            CasterType = CasterType.None,
             Features = [
                 new ClassFeature5e
                 {
@@ -52,7 +53,33 @@ public class CharacterClassDataService
                     Level = 2
                 },
             ],
-        }
+        },
+        new Class5e
+        {
+            Name = "Bard",
+            CasterType = CasterType.Full,
+            ClassGroup = ClassGroup.Expert,
+            Edition = Edition.TwentyTwentyFour,
+
+            Description = "Doot Doot Magic Floot",
+            IsSRD = true,
+            CopyrightInfo = SRDFiveTwoOneCopyrightInfo,
+            HitDie = 8,
+            Features = [
+                new ClassFeature5e
+                {
+                    Name = "Spellcasting",
+                    Description = "You can cast spells using your Charisma as your spellcasting ability. You know a number of Bard spells, and you can learn more as you gain levels.",
+                    Level = 1
+                },
+                new ClassFeature5e
+                {
+                    Name = "Bardic Inspiration",
+                    Description = "You can inspire others through stirring words or music. You have a number of Bardic Inspiration dice equal to your Charisma modifier (minimum of one). You regain all expended uses when you finish a Long Rest.",
+                    Level = 1
+                },
+            ],
+        },
     ];
     private List<Class5e> homebrewClasses = [];
 

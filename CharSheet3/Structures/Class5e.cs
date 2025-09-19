@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using static CharSheet3.Structures.FundamentalEnums5e;
+
 namespace CharSheet3.Structures;
 
 /// <summary>
@@ -94,6 +96,8 @@ public class Class5e : ObservableObject, IPlayerOption
     public int HitDie { get; set; } = 8; // Default to D8
     public ClassGroup ClassGroup { get; set; } = ClassGroup.None;
     public CasterType CasterType { get; set; } = CasterType.None;
+    public AbilityScore PrimaryAbility { get; set; } = AbilityScore.Strength; // Default to Strength,
+    public bool[] SavingThrows { get; set; } = [true, false, false, false, false, false]; // Default to Strength saving throw proficiency.
     public List<ClassFeature5e> Features { get; set; } = [];
 }
 
