@@ -125,8 +125,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     // --- Strength ---
     [ObservableProperty]
-    private Proficiency strengthSaves;
-    partial void OnStrengthSavesChanged(Proficiency value)
+    private SkillProficiency strengthSaves;
+    partial void OnStrengthSavesChanged(SkillProficiency value)
     {
         characterData.StrengthSaves = value;
         StrengthSavesModifier = CalculateProficiencyBonus(StrengthModifier, characterData.Level, value);
@@ -135,8 +135,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int strengthSavesModifier;
 
     [ObservableProperty]
-    private Proficiency athletics;
-    partial void OnAthleticsChanged(Proficiency value)
+    private SkillProficiency athletics;
+    partial void OnAthleticsChanged(SkillProficiency value)
     {
         characterData.Athletics = value;
         AthleticsModifier = CalculateProficiencyBonus(StrengthModifier, characterData.Level, value);
@@ -146,8 +146,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     // --- Dexterity ---
     [ObservableProperty]
-    private Proficiency dexteritySaves;
-    partial void OnDexteritySavesChanged(Proficiency value)
+    private SkillProficiency dexteritySaves;
+    partial void OnDexteritySavesChanged(SkillProficiency value)
     {
         characterData.DexteritySaves = value;
         DexteritySavesModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, value);
@@ -156,8 +156,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int dexteritySavesModifier;
 
     [ObservableProperty]
-    private Proficiency acrobatics;
-    partial void OnAcrobaticsChanged(Proficiency value)
+    private SkillProficiency acrobatics;
+    partial void OnAcrobaticsChanged(SkillProficiency value)
     {
         characterData.Acrobatics = value;
         AcrobaticsModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, value);
@@ -166,8 +166,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int acrobaticsModifier;
 
     [ObservableProperty]
-    private Proficiency stealth;
-    partial void OnStealthChanged(Proficiency value)
+    private SkillProficiency stealth;
+    partial void OnStealthChanged(SkillProficiency value)
     {
         characterData.Stealth = value;
         StealthModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, value);
@@ -176,8 +176,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int stealthModifier;
 
     [ObservableProperty]
-    private Proficiency sleightOfHand;
-    partial void OnSleightOfHandChanged(Proficiency value)
+    private SkillProficiency sleightOfHand;
+    partial void OnSleightOfHandChanged(SkillProficiency value)
     {
         characterData.SleightOfHand = value;
         SleightOfHandModifier = CalculateProficiencyBonus(DexterityModifier, characterData.Level, value);
@@ -187,8 +187,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     // --- Constitution ---
     [ObservableProperty]
-    private Proficiency constitutionSaves;
-    partial void OnConstitutionSavesChanged(Proficiency value)
+    private SkillProficiency constitutionSaves;
+    partial void OnConstitutionSavesChanged(SkillProficiency value)
     {
         characterData.ConstitutionSaves = value;
         ConstitutionSavesModifier = CalculateProficiencyBonus(ConstitutionModifier, characterData.Level, value);
@@ -198,8 +198,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     // --- Intelligence ---
     [ObservableProperty]
-    private Proficiency intelligenceSaves;
-    partial void OnIntelligenceSavesChanged(Proficiency value)
+    private SkillProficiency intelligenceSaves;
+    partial void OnIntelligenceSavesChanged(SkillProficiency value)
     {
         characterData.IntelligenceSaves = value;
         IntelligenceSavesModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, value);
@@ -208,8 +208,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int intelligenceSavesModifier;
 
     [ObservableProperty]
-    private Proficiency arcana;
-    partial void OnArcanaChanged(Proficiency value)
+    private SkillProficiency arcana;
+    partial void OnArcanaChanged(SkillProficiency value)
     {
         characterData.Arcana = value;
         ArcanaModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, value);
@@ -218,8 +218,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int arcanaModifier;
 
     [ObservableProperty]
-    private Proficiency history;
-    partial void OnHistoryChanged(Proficiency value)
+    private SkillProficiency history;
+    partial void OnHistoryChanged(SkillProficiency value)
     {
         characterData.History = value;
         HistoryModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, value);
@@ -228,8 +228,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int historyModifier;
 
     [ObservableProperty]
-    private Proficiency investigation;
-    partial void OnInvestigationChanged(Proficiency value)
+    private SkillProficiency investigation;
+    partial void OnInvestigationChanged(SkillProficiency value)
     {
         characterData.Investigation = value;
         InvestigationModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, value);
@@ -238,8 +238,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int investigationModifier;
 
     [ObservableProperty]
-    private Proficiency nature;
-    partial void OnNatureChanged(Proficiency value)
+    private SkillProficiency nature;
+    partial void OnNatureChanged(SkillProficiency value)
     {
         characterData.Nature = value;
         NatureModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, value);
@@ -248,8 +248,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int natureModifier;
 
     [ObservableProperty]
-    private Proficiency religion;
-    partial void OnReligionChanged(Proficiency value)
+    private SkillProficiency religion;
+    partial void OnReligionChanged(SkillProficiency value)
     {
         characterData.Religion = value;
         ReligionModifier = CalculateProficiencyBonus(IntelligenceModifier, characterData.Level, value);
@@ -259,8 +259,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     // --- Wisdom ---
     [ObservableProperty]
-    private Proficiency wisdomSaves;
-    partial void OnWisdomSavesChanged(Proficiency value)
+    private SkillProficiency wisdomSaves;
+    partial void OnWisdomSavesChanged(SkillProficiency value)
     {
         characterData.WisdomSaves = value;
         WisdomSavesModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, value);
@@ -269,8 +269,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int wisdomSavesModifier;
 
     [ObservableProperty]
-    private Proficiency animalHandling;
-    partial void OnAnimalHandlingChanged(Proficiency value)
+    private SkillProficiency animalHandling;
+    partial void OnAnimalHandlingChanged(SkillProficiency value)
     {
         characterData.AnimalHandling = value;
         AnimalHandlingModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, value);
@@ -279,8 +279,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int animalHandlingModifier;
 
     [ObservableProperty]
-    private Proficiency insight;
-    partial void OnInsightChanged(Proficiency value)
+    private SkillProficiency insight;
+    partial void OnInsightChanged(SkillProficiency value)
     {
         characterData.Insight = value;
         InsightModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, value);
@@ -289,8 +289,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int insightModifier;
 
     [ObservableProperty]
-    private Proficiency medicine;
-    partial void OnMedicineChanged(Proficiency value)
+    private SkillProficiency medicine;
+    partial void OnMedicineChanged(SkillProficiency value)
     {
         characterData.Medicine = value;
         MedicineModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, value);
@@ -299,8 +299,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int medicineModifier;
 
     [ObservableProperty]
-    private Proficiency perception;
-    partial void OnPerceptionChanged(Proficiency value)
+    private SkillProficiency perception;
+    partial void OnPerceptionChanged(SkillProficiency value)
     {
         characterData.Perception = value;
         PerceptionModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, value);
@@ -309,8 +309,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int perceptionModifier;
 
     [ObservableProperty]
-    private Proficiency survival;
-    partial void OnSurvivalChanged(Proficiency value)
+    private SkillProficiency survival;
+    partial void OnSurvivalChanged(SkillProficiency value)
     {
         characterData.Survival = value;
         SurvivalModifier = CalculateProficiencyBonus(WisdomModifier, characterData.Level, value);
@@ -320,8 +320,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
 
     // --- Charisma ---
     [ObservableProperty]
-    private Proficiency charismaSaves;
-    partial void OnCharismaSavesChanged(Proficiency value)
+    private SkillProficiency charismaSaves;
+    partial void OnCharismaSavesChanged(SkillProficiency value)
     {
         characterData.CharismaSaves = value;
         CharismaSavesModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, value);
@@ -330,8 +330,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int charismaSavesModifier;
 
     [ObservableProperty]
-    private Proficiency deception;
-    partial void OnDeceptionChanged(Proficiency value)
+    private SkillProficiency deception;
+    partial void OnDeceptionChanged(SkillProficiency value)
     {
         characterData.Deception = value;
         DeceptionModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, value);
@@ -340,8 +340,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int deceptionModifier;
 
     [ObservableProperty]
-    private Proficiency intimidation;
-    partial void OnIntimidationChanged(Proficiency value)
+    private SkillProficiency intimidation;
+    partial void OnIntimidationChanged(SkillProficiency value)
     {
         characterData.Intimidation = value;
         IntimidationModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, value);
@@ -350,8 +350,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int intimidationModifier;
 
     [ObservableProperty]
-    private Proficiency performance;
-    partial void OnPerformanceChanged(Proficiency value)
+    private SkillProficiency performance;
+    partial void OnPerformanceChanged(SkillProficiency value)
     {
         characterData.Performance = value;
         PerformanceModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, value);
@@ -360,8 +360,8 @@ public partial class CharacterSheetViewModel : ViewModelBase
     private int performanceModifier;
 
     [ObservableProperty]
-    private Proficiency persuasion;
-    partial void OnPersuasionChanged(Proficiency value)
+    private SkillProficiency persuasion;
+    partial void OnPersuasionChanged(SkillProficiency value)
     {
         characterData.Persuasion = value;
         PersuasionModifier = CalculateProficiencyBonus(CharismaModifier, characterData.Level, value);

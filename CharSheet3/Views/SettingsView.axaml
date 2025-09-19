@@ -14,7 +14,7 @@
   >
   <!-- Todo make this autogenerate -->
   <Grid Margin="5" ColumnDefinitions="auto, auto" RowDefinitions="auto, auto, auto">
-    <TextBlock Text="Settings Page" Grid.Row="0" Grid.ColumnSpan="2"/>
+    <TextBlock Text="Settings Page. WARNING don't trust your save data" Grid.Row="0" Grid.ColumnSpan="2"/>
     <TextBlock Text="Character builder data" Grid.Row="1" Grid.Column="0"/>
     <StackPanel Grid.Row="1" Grid.Column="1" Margin="5" Orientation="Horizontal">
       <TextBox Text="{Binding ClassDataPath}"/>

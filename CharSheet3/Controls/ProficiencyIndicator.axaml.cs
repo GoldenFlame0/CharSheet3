@@ -9,11 +9,11 @@ namespace CharSheet3.Controls;
 
 public partial class ProficiencyIndicator : UserControl
 {
-    public static readonly StyledProperty<Proficiency> ProficiencyLevelProperty =
-        AvaloniaProperty.Register<ProficiencyIndicator, Proficiency>(
-            nameof(ProficiencyLevel), defaultValue: Proficiency.None);
+    public static readonly StyledProperty<SkillProficiency> ProficiencyLevelProperty =
+        AvaloniaProperty.Register<ProficiencyIndicator, SkillProficiency>(
+            nameof(ProficiencyLevel), defaultValue: SkillProficiency.None);
 
-    public Proficiency ProficiencyLevel
+    public SkillProficiency ProficiencyLevel
     {
         get => GetValue(ProficiencyLevelProperty);
         set => SetValue(ProficiencyLevelProperty, value);
@@ -35,9 +35,9 @@ public partial class ProficiencyIndicator : UserControl
     {
         ProficiencyLevel = ProficiencyLevel switch
         {
-            Proficiency.None => Proficiency.Proficient,
-            Proficiency.Proficient => Proficiency.Expertise,
-            _ => Proficiency.None
+            SkillProficiency.None => SkillProficiency.Proficient,
+            SkillProficiency.Proficient => SkillProficiency.Expertise,
+            _ => SkillProficiency.None
         };
     }
 
@@ -56,8 +56,8 @@ public partial class ProficiencyIndicator : UserControl
         }
         textBlock.Text = ProficiencyLevel switch
         {
-            Proficiency.Proficient => "P",
-            Proficiency.Expertise => "E",
+            SkillProficiency.Proficient => "P",
+            SkillProficiency.Expertise => "E",
             _ => "",
         };
     }

@@ -11,10 +11,24 @@ public static class FundamentalEnums5e
         Charisma
     }
 
-    public enum Proficiency
+    public enum SkillProficiency
     {
         None,
         Proficient,
         Expertise
+    }
+    public enum WeaponProficiency
+    {
+        None,
+        Proficient,
+        Mastery
+    }
+
+    public enum ArmourTier
+    {
+        Clothing,
+        Light,
+        Medium,
+        Heavy
     }
 }
