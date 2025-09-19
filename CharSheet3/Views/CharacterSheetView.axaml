@@ -18,17 +18,17 @@
       <conv:ModifierDisplayConverter x:Key="ModifierDisplayConverter"/>
     </ResourceDictionary>
   </UserControl.Resources>
-  <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+  <Grid RowDefinitions="auto, auto, auto, auto" ColumnDefinitions="auto, auto, auto, auto">
 
-    <Border Classes="TopBar">
+    <Border Classes="TopBar" Grid.Row="0" Grid.Column="0">
       <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
         <Button Content="New Character" Margin="5" Command="{Binding NewCharacterCommand}" Classes="TopBar"/>
         <Button Content="Load Character" Margin="5" Command="{Binding LoadCharacterDataCommand}" Classes="TopBar"/>
         <Button Content="Save Character" Margin="5" Command="{Binding SaveCharacterDataCommand}" Classes="TopBar"/>
       </StackPanel>
     </Border>
-
-    <StackPanel Orientation="Horizontal">
+    <!-- Level zeros -->
+    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
       <TextBlock Text="Name: " Margin="5"/>
       <TextBox
         HorizontalAlignment="Left"
@@ -37,14 +37,37 @@
         Margin="10"
         Text="{Binding CharacterName, Mode=TwoWay}"/>
       <TextBlock
-        Text="Level: "
+        Text="Ancestry: "
         Margin="5"
         />
+      <ComboBox></ComboBox>
+      <Grid
+        RowDefinitions="*, *"
+        ColumnDefinitions="auto, auto"
+        Margin="5">
+        <TextBlock
+          Text="Level: "
+          Margin="5"
+          Grid.Row="0" Grid.Column="0"
+          />
+        <TextBlock
+          Text="{Binding Level}"
+          Width="50" HorizontalAlignment="Left"
+          Grid.Row="0" Grid.Column="1"
+          />
+        <Button
+          Content="Add Class"
+          Grid.Row="1" Grid.ColumnSpan="2"
+          />
+      </Grid>
+      <TextBlock Text="Class 1: " Margin="5"/>
+      <ComboBox>
+      </ComboBox>
       <TextBlock
-        Text="{Binding Level}"
-        Width="50" Margin="5" HorizontalAlignment="Left"
+        Text="Background: "
+        Margin="5"
         />
-      <TextBlock Text="Class: " Margin="5"/>
+      <ComboBox></ComboBox>
     </StackPanel>
     <!-- Ability Scores -->
     <Grid
@@ -52,8 +75,9 @@
       HorizontalAlignment="Left"
       VerticalAlignment="Center"
       ColumnDefinitions="1*, 1*, 1*, 1*, 1*, 1*"
-      RowDefinitions="auto, auto, auto, auto">
-
+      RowDefinitions="auto, auto, auto, auto"
+      Grid.Row="3"
+      Grid.Column="0">
       <!-- Labels for each field. -->
       <TextBlock
         Grid.Row="0" Grid.Column="0" Margin="5" Text="STR" Classes="AbilityLabel"
@@ -253,5 +277,5 @@
         </StackPanel>
       </StackPanel>
     </Grid>
-  </StackPanel>
+  </Grid>
 </UserControl>
