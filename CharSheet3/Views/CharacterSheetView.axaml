@@ -7,7 +7,7 @@
   xmlns:vm="clr-namespace:CharSheet3.ViewModels"
   xmlns:conv="clr-namespace:CharSheet3.Converters"
   xmlns:ctrls="clr-namespace:CharSheet3.Controls"
-  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
   x:DataType="vm:CharacterSheetViewModel"
   x:Class="CharSheet3.Views.CharacterSheetView"
   xmlns:services="using:CharSheet3.Services"
@@ -277,5 +277,7 @@
         </StackPanel>
       </StackPanel>
     </Grid>
+  <TextBlock Text="Class Features" Grid.Column="1" Grid.Row="1"/>
+  
   </Grid>
 </UserControl>
