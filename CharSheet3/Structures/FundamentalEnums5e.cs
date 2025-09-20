@@ -1,6 +1,12 @@
 ﻿namespace CharSheet3.Structures;
 public static class FundamentalEnums5e
 {
+    public enum Edition
+    {
+        OriginalRelease,
+        TwentyTwentyFour
+    }
+
     public enum AbilityScore
     {
         Strength,
@@ -17,6 +23,7 @@ public static class FundamentalEnums5e
         Proficient,
         Expertise
     }
+
     public enum WeaponProficiency
     {
         None,
@@ -30,5 +37,31 @@ public static class FundamentalEnums5e
         Light,
         Medium,
         Heavy
+    }
+
+    public enum SpellSchool
+    {
+        Abjuration,
+        Conjuration,
+        Divination,
+        Enchantment,
+        Evocation,
+        Illusion,
+        Necromancy,
+        Transmutation
+    }
+
+    /// <summary>
+    /// Mostly an import from Pathfinder, but I'm adding it as a fallback when adding class/subclass and spell options.
+    /// Especially when one doesn't know about the other.
+    /// </summary>
+    public enum MagicOrigin
+    {
+        None,
+        Arcane,
+        Divine,
+        Primal,
+        Occult,
+        Psionic,
     }
 }

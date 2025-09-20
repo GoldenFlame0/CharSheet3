@@ -277,7 +277,9 @@
         </StackPanel>
       </StackPanel>
     </Grid>
-  <TextBlock Text="Class Features" Grid.Column="1" Grid.Row="1"/>
+  
+  
+  <TextBlock Text="Notes" Grid.Column="1" Grid.Row="1"/>
   
   </Grid>
 </UserControl>

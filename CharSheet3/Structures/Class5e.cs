@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -20,25 +19,6 @@ public enum CasterType
     // No, we're not going to add a way of doing spell slot progression that doesn't fit into the above categories.
 }
 
-/// <summary>
-/// I want to use this at some point.
-/// </summary>
-public enum MagicOrigin
-{
-    None,
-    Arcane,
-    Divine,
-    Primal,
-    Occult,
-    Psionic,
-}
-
-public enum Edition
-{
-    OriginalRelease,
-    TwentyTwentyFour
-}
-
 public enum ClassGroup
 {
     None,
@@ -46,39 +26,6 @@ public enum ClassGroup
     Mage,
     Priest,
     Warrior
-}
-
-public interface IPlayerOption
-{
-    /// <summary>
-    /// The name of the option.
-    /// </summary>
-    public string Name { get; set; }
-    /// <summary>
-    /// Which release of 5th edition this option is for (2014 or 2024).
-    /// </summary>
-    public Edition Edition { get; set; }
-    /// <summary>
-    /// A short description of the option. Mostly fluff.
-    /// </summary>
-    public string Description { get; set; }
-    /// <summary>
-    /// The source book, pdf, whatever this option comes from.
-    /// </summary>
-    public string Source { get; set; }
-    /// <summary>
-    /// Is this option part of the System Reference Document (SRD) or is it "homebrew"?
-    /// Important since SRD options are delivered with the application.
-    /// </summary>
-    public bool IsSRD { get; set; }
-    /// <summary>
-    /// Copyright information for the option.
-    /// </summary>
-    public string CopyrightInfo { get; set; }
-    /// <summary>
-    /// A set of features that this option provides.
-    /// </summary>
-    public List<ClassFeature5e> Features { get; set; }
 }
 
 /// <summary>
@@ -97,7 +44,7 @@ public class Class5e : ObservableObject, IPlayerOption
     public ClassGroup ClassGroup { get; set; } = ClassGroup.None;
     public CasterType CasterType { get; set; } = CasterType.None;
     public AbilityScore PrimaryAbility { get; set; } = AbilityScore.Strength; // Default to Strength,
-    public bool[] SavingThrows { get; set; } = [true, false, false, false, false, false]; // Default to Strength saving throw proficiency.
+    public bool[] SavingThrows { get; set; } = [false, false, false, false, false, false];
     public List<ClassFeature5e> Features { get; set; } = [];
 }
 
@@ -121,5 +68,6 @@ public class ClassFeature5e : ObservableObject
     /// Description of the feature. Each line is a separate string in the list.
     /// </summary>
     public string Description { get; set; } = "Feature description goes here.";
-    public int Level { get; set; } = 1;
+    public int? LevelObtained { get; set; } = 1;
+    public List<KeyValuePair<string, uint>> Proficiencies { get; set; } = []; // Granted proficiencies and to what degree (cast to relevant enum).
 }
