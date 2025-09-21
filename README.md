@@ -1,6 +1,6 @@
 # DnD 5e Character Sheet
 
-This is a project I started to learn Avalonia and also keep up my C# skills. It's a 5e character sheet application meant to be highly portable have easy management of creation options. I intend to have an end-state where new classes and subclasses can be created in-application and easily shared through simple text files.
+This is a project I started to learn Avalonia and also keep up my C# skills. It's a 5e character sheet application meant to be highly portable with easy management of creation options. I intend to have an end-state where new classes and subclasses can be created in-application and easily shared through simple text files.
 
 I'm also completely nuts and developing on Windows for use on Linux. Backwards, I know.
 
@@ -8,7 +8,13 @@ I'm also completely nuts and developing on Windows for use on Linux. Backwards, 
 
 This application is still in early development. Functionality is incomplete. Export/save data is not stable and can change for any reason. 
 
+A lot of the code is also "make it work" rather than "make it good". Please excuse the mess.
+
 ## Contributing
+
+First and foremost, if you make changes, I encourage you to make a pull request to pull it into the main repository. I'd love to see what you've done and include it. (Also, developing this entire thing is more work than I realised.)
+
+Some guidelines if you do:
 
 1. I need to use this on both Windows and Fedora, so any changes must be cross-platform. For maintainence reasons, I'd like to reduce the number of dependencies, so please avoid adding new ones unless absolutely necessary.
 2. This repository should be managed with a trunk-based development workflow, with "develop" as the main branch. Develop should only contain merge commits, save for emergencies. Please use feature branches for any new work.
